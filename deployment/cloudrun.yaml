@@ -1,0 +1,39 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: ppac-reporting-engine
+  namespace: og-agentic-ecosystem
+  labels:
+    cloud.google.com/location: asia-south1
+    app.kubernetes.io/name: ppac-reporting-engine
+    app.kubernetes.io/part-of: oil-and-gas-agent-portfolio
+    persona: P40_Petroleum_Planning_Analyst
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/minScale: "1"
+        autoscaling.knative.dev/maxScale: "10"
+        run.googleapis.com/cpu-throttling: "false"
+        run.googleapis.com/execution-environment: "gen2"
+    spec:
+      containerConcurrency: 80
+      timeoutSeconds: 300
+      serviceAccountName: ppac-synthesis-agent@og-agentic-ecosystem.iam.gserviceaccount.com
+      containers:
+        - image: asia-south1-docker.pkg.dev/og-agentic-ecosystem/agent-images/ppac-reporting-engine:v1.0.0
+          ports:
+            - containerPort: 8080
+          resources:
+            limits:
+              cpu: "2000m"
+              memory: "4Gi"
+          env:
+            - name: ENVIRONMENT
+              value: "production"
+            - name: GCP_REGION
+              value: "asia-south1"
+            - name: A2A_PROTOCOL_VERSION
+              value: "1.0"
+            - name: DEFAULT_PERIOD_CRON
+              value: "0 6 5 * *"

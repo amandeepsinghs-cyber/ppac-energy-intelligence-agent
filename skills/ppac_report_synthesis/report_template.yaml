@@ -1,0 +1,150 @@
+# ==============================================================================
+# PPAC EXECUTIVE REPORT TEMPLATE SPECIFICATION (v2.0)
+# Decoupled Presentation, Structure & Guardrail Schema
+# ==============================================================================
+
+metadata:
+  report_id: "PPAC-EXEC-FLASH-RECKONER"
+  title: "EXECUTIVE HYDROCARBON INTELLIGENCE & STATUTORY REPORT"
+  subtitle: "Monthly Macro-Economic, Domestic Consumption & Petroleum Pricing Digest"
+  organization: "Petroleum Planning & Analysis Cell (PPAC)"
+  ministry: "Ministry of Petroleum & Natural Gas, Government of India"
+  classification: "Official Sovereign Publication / Executive Board Briefing"
+  target_pages: 12-16
+  version: "2.0.0"
+
+branding:
+  primary_color: "#1B365D"      # Deep Sovereign Navy
+  secondary_color: "#2E5B88"    # Petroleum Slate Blue
+  accent_color: "#C68A4C"       # Gold / Amber Energy Accent
+  alert_color: "#A82222"        # Critical Anomaly Crimson
+  surface_bg: "#F0F4F8"         # Institutional Tint
+  zebra_bg: "#F8FAFC"           # Subtle Table Alternate Row
+  font_heading: "Calibri"
+  font_body: "Calibri Light"
+  logos:
+    header_crest: "assets/mopng_crest.png"
+    institutional_logo: "assets/ppac_logo.png"
+
+kpi_dashboard_ribbon:
+  - id: "brent_live_spot"
+    label: "Brent Crude (Live Spot)"
+    unit: "USD/bbl"
+    source: "yfinance (BZ=F)"
+    highlight_variance_vs: "icb_statutory_avg"
+  - id: "icb_composite"
+    label: "Indian Crude Basket (ICB)"
+    unit: "USD/bbl"
+    source: "Statutory Weighted Pricing (75.6% Sour / 24.4% Sweet)"
+  - id: "domestic_demand_total"
+    label: "Total Petroleum Consumption"
+    unit: "TMT"
+    source: "Reconciled OMC Sales Ledger (IOCL, BPCL, HPCL)"
+  - id: "import_dependency"
+    label: "Net Petroleum Import Dependency"
+    unit: "%"
+    source: "Indigenous Crude Balance vs Net Intake"
+  - id: "apm_natural_gas"
+    label: "Domestic Natural Gas APM"
+    unit: "USD/MMBTU"
+    source: "Kirit Parikh Statutory Collar ($4.00 - $6.50)"
+
+section_0_audit:
+  title: "SECTION 0: AI AUDIT & LINEAGE RECONCILIATION CHECKLIST"
+  active_alert_banner: "🔴 MANDATORY ACTION REQUIRED: UNRESOLVED HIGH-VARIANCE ITEMS FLAGGED"
+  cleared_alert_banner: "🟢 ALL RECONCILIATION & ANOMALY CHECKS PASSED (APPROVED FOR RELEASE)"
+  variance_thresholds:
+    warning_pct: 10.0
+    critical_pct: 15.0
+  required_fields:
+    - anomaly_id
+    - entity_id
+    - severity
+    - field_name
+    - reported_value
+    - expected_range
+    - variance_pct
+    - source_reference
+
+chapters:
+  - id: "chapter_1_macro"
+    number: 1
+    title: "Macro-Economic Environment & Global Energy Backdrop"
+    data_sources: ["live_market_api", "text_commentary"]
+    visual:
+      chart_id: "chart_brent_wti_spot_trend"
+      type: "time_series_line"
+      title: "Global Crude Oil Benchmark Trends (30-Day Live Daily Trajectory)"
+    narrative_focus:
+      - "Global crude benchmark spreads (Brent Dated vs WTI Cushing vs Dubai)"
+      - "OPEC+ voluntary production adjustments and impact on refinery feedstock costs"
+      - "Domestic GDP growth, CPI inflation, and USD/INR exchange rate movement"
+
+  - id: "chapter_2_pricing"
+    number: 2
+    title: "Statutory Indian Crude Basket (ICB) & Natural Gas Pricing"
+    data_sources: ["pricing_engine", "live_market_api"]
+    tables:
+      - id: "icb_breakdown_table"
+        title: "Table 2.1: Indian Crude Basket Price Composition"
+      - id: "gas_apm_table"
+        title: "Table 2.2: Domestic Natural Gas APM & HPHT Ceilings"
+    narrative_focus:
+      - "Comparison of current month ICB average against prior 3 months"
+      - "Enforcement of statutory Kirit Parikh $6.50/MMBTU floor/ceiling collar"
+
+  - id: "chapter_3_sales"
+    number: 3
+    title: "Domestic Petroleum Consumption & OMC Market Performance"
+    data_sources: ["omc_sales_excel"]
+    visual:
+      chart_id: "chart_omc_market_share"
+      type: "donut_or_bar"
+      title: "OMC Sales Volume Distribution by Major Product (MS, HSD, LPG)"
+    tables:
+      - id: "product_sales_matrix"
+        title: "Table 3.1: Reconciled Monthly Fuel Consumption (TMT)"
+    narrative_focus:
+      - "Product-wise consumption trends (Diesel HSD, Petrol MS, LPG, ATF)"
+      - "Root-cause commentary for flagged volume anomalies"
+
+  - id: "chapter_4_price_buildup"
+    number: 4
+    title: "Retail Price Build-up & Sovereign Fiscal Structure"
+    data_sources: ["fiscal_pricing"]
+    visual:
+      chart_id: "chart_price_buildup_breakdown"
+      type: "stacked_bar"
+      title: "Retail Selling Price (RSP) Tax & Duty Distribution in Delhi Metro"
+    tables:
+      - id: "rsp_buildup_table"
+        title: "Table 4.1: Delhi Ex-Depot, Excise Duty, VAT & Dealer Margin Breakdown"
+    narrative_focus:
+      - "Base price components vs central excise duties and state sales tax (VAT)"
+
+  - id: "chapter_5_sovereign_intel"
+    number: 5
+    title: "Sovereign & Regulatory Intelligence (Parliament Watch & Global Outlook)"
+    data_sources: ["parliament_regulatory_dispatch"]
+    narrative_focus:
+      - "Parliamentary Questions (Lok Sabha / Rajya Sabha) on fuel under-recoveries and PMUY DBT"
+      - "Petroleum Standing Committee recommendations on Strategic Petroleum Reserves (SPR Phase II)"
+      - "PNGRB unified pipeline tariffs and DGH OALP exploration bid rounds"
+      - "Global agency outlooks (EIA STEO and IEA Oil Market Report benchmarks)"
+
+  - id: "chapter_6_projections"
+    number: 6
+    title: "60-Day Econometric Demand Projections & Operational Mandate"
+    data_sources: ["projection_model"]
+    visual:
+      chart_id: "chart_demand_projection"
+      type: "solid_to_dotted_line"
+      title: "High-Speed Diesel (HSD) 60-Day Forward Projection Horizon"
+      style: "Solid Navy Historical -> Dotted Amber Projection with 95% Confidence Cone"
+    executive_so_what_mandate:
+      title: "EXECUTIVE 'SO WHAT' & POLICY ACTION MANDATE"
+      directives:
+        - "Post-monsoon agrarian demand surge (+11.1% in October) requires IOCL/BPCL to build 14 days additional depot buffer stock in northern agrarian corridors by Sept 25."
+        - "Anticipated refinery crude intake surge (+1.2 MMT) expands October petroleum import bill by ~$780M-$820M at current spot levels."
+        - "Festive LPG refill surge requires advance allocation of ₹640 Cr in DBT Ujjwala subsidy disbursements."
+

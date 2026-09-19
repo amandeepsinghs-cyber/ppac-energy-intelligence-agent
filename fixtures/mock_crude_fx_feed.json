@@ -1,0 +1,57 @@
+{
+  "period_id": "2026-08",
+  "brent_usd_bbl": 82.1,
+  "oman_dubai_usd_bbl": 78.5,
+  "weight_sour_pct": 75.6,
+  "weight_sweet_pct": 24.4,
+  "usd_inr_exchange_rate": 83.95,
+  "prior_month_icb_usd": 82.0,
+  "statutory_gas_floor_usd": 4.0,
+  "statutory_gas_ceiling_usd": 6.5,
+  "hpht_deepwater_gas_usd_mmbtu": 9.87,
+  "macro": {
+    "gdp_growth_rate_pct": 7.2,
+    "iip_general_index": 142.5,
+    "iip_manufacturing_growth_pct": 4.8,
+    "cpi_inflation_pct": 4.3,
+    "forex_reserves_usd_billion": 685.2
+  },
+  "indigenous_crude": {
+    "ongc_mmt": 1.62,
+    "oil_mmt": 0.28,
+    "psc_pvt_mmt": 0.52,
+    "total_mmt": 2.42
+  },
+  "refinery_processing": {
+    "psu_refineries_mmt": 14.8,
+    "private_jv_refineries_mmt": 7.7,
+    "total_throughput_mmt": 22.5,
+    "average_capacity_utilization_pct": 103.2
+  },
+  "trade_balance": {
+    "crude_imports_mmt": 19.8,
+    "pol_exports_mmt": 5.1,
+    "pol_imports_mmt": 3.8,
+    "gross_import_bill_usd_billion": 12.4,
+    "gross_import_bill_inr_crores": 104100.0,
+    "import_dependency_pct": 87.8
+  },
+  "delhi_price_buildup": {
+    "petrol": {
+      "base_price": 55.4,
+      "freight": 0.2,
+      "central_excise": 19.9,
+      "dealer_commission": 3.8,
+      "state_vat": 15.42,
+      "retail_selling_price": 94.72
+    },
+    "diesel": {
+      "base_price": 56.2,
+      "freight": 0.22,
+      "central_excise": 15.8,
+      "dealer_commission": 2.6,
+      "state_vat": 12.8,
+      "retail_selling_price": 87.62
+    }
+  }
+}

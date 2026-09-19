@@ -1,0 +1,20 @@
+.venv/
+.pytest_cache/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Cloud Storage mirror & terraform (already in gs://og-sovereign-ppac-data)
+data_lake/
+terraform/
+output_artifacts/
+snapshot_aug2026.pdf
+icb_aug2026.pdf
+
+# Scratch migration scripts
+update_*.py
+align_*.py
+fix_*.py
+organize_*.py
+compile_*.py
