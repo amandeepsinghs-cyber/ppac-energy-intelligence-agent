@@ -14,13 +14,13 @@ def get_ready_reckoner_dataset(period_id: str = "2026-08") -> Dict[str, Any]:
         "executive_highlights": [
             "Indigenous crude oil and condensate production during August 2026 was 2.30 MMT (Nomination: 78.7%, Pre-NELP: 11.8%, NELP: 9.3%).",
             "Total crude oil processed across Indian refineries reached 23.80 MMT (+2.0% YoY), with PSU/JV refiners processing 15.80 MMT and private refiners 8.00 MMT (Capacity utilization: 104.2%).",
-            "Net Oil & Gas import bill for August 2026 stood at 1.20 Billion (3.70B crude imports + .20B LNG imports less .00B POL exports).",
-            "Indian Basket Crude (ICB) averaged 0.19 / bbl (₹8,610.44 / bbl) based on 75.6% Oman/Dubai (9.98) and 24.4% Dated Brent (0.84) at RBI exchange rate ₹95.47 / USD.",
+            "Net Oil & Gas import bill for August 2026 stood at $11.20 Billion ($13.70B crude imports + $1.20B LNG imports less $5.00B POL exports).",
+            "Indian Basket Crude (ICB) averaged $90.19 / bbl (₹7,589.50 / bbl) based on 75.6% Oman/Dubai ($89.98) and 24.4% Dated Brent ($90.84) at RBI exchange rate ₹84.15 / USD.",
             "Production of petroleum products (POL) was 24.80 MMT (+3.0% YoY). Major shares: HSD 41.9%, MS 17.5%, Naphtha 6.5%, ATF 5.1%, LPG 4.9%, Petcoke 4.8%.",
             "Total POL consumption reached 18,606 TMT (19.91 MMT gross, +2.9% YoY), led by HSD (7,023 TMT, +10.0% YoY) and MS (3,250 TMT, +9.2% YoY).",
             "Ethanol blending in Motor Spirit achieved 20.0% in August 2026, sustaining the cumulative 20.0% target for Ethanol Supply Year (ESY 2025-26).",
             "Natural gas consumption reached 5,740 MMSCM, supported by 2,825 MMSCM net domestic production and 2,915 MMSCM LNG regasification (+1.5% YoY).",
-            "Domestic APM gas ceiling enforced at statutory cap of .00 / MMBTU (Kirit Parikh formula), while HP-HT deepwater ceiling remained at .90 / MMBTU.",
+            "Domestic APM gas ceiling enforced at statutory cap of $7.00 / MMBTU (Kirit Parikh formula), while HP-HT deepwater ceiling remained at $8.90 / MMBTU.",
             "Pradhan Mantri Ujjwala Yojana (PMUY) active beneficiaries reached 10.33 Crore, supported by ₹12,000 Crore targeted budgetary subsidy envelope.",
         ],
         "table1_economic_indicators": [
@@ -68,11 +68,11 @@ def get_ready_reckoner_dataset(period_id: str = "2026-08") -> Dict[str, Any]:
             {"crude_type": "Total Crude Processed in Refineries", "volume_mmt": "23.80", "share_pct": "100.0%", "key_grades": "Average API: 31.8° · Average Sulphur: 1.62 wt%"},
         ],
         "table6_crude_imports_trade": [
-            {"commodity": "Crude Oil Imports", "qty_mmt": "21.60", "val_usd_billion": "3.70", "val_inr_crore": "₹1,30,794", "fytd_qty_mmt": "102.40", "fytd_val_usd": "4.80 B"},
-            {"commodity": "LNG Imports (Regasified)", "qty_mmt": "2.20", "val_usd_billion": ".20", "val_inr_crore": "₹11,456", "fytd_qty_mmt": "10.80", "fytd_val_usd": ".90 B"},
-            {"commodity": "Gross Hydrocarbon Imports", "qty_mmt": "23.80", "val_usd_billion": "4.90", "val_inr_crore": "₹1,42,250", "fytd_qty_mmt": "113.20", "fytd_val_usd": "0.70 B"},
-            {"commodity": "Petroleum Products (POL) Exports", "qty_mmt": "5.10", "val_usd_billion": ".00", "val_inr_crore": "₹47,735", "fytd_qty_mmt": "24.20", "fytd_val_usd": "3.80 B"},
-            {"commodity": "Net Hydrocarbon Import Bill", "qty_mmt": "18.70", "val_usd_billion": "1.20", "val_inr_crore": "₹1,06,926", "fytd_qty_mmt": "89.00", "fytd_val_usd": "3.40 B"},
+            {"commodity": "Crude Oil Imports", "qty_mmt": "21.60", "val_usd_billion": "$13.70 B", "val_inr_crore": "₹1,15,286 Cr", "fytd_qty_mmt": "102.40", "fytd_val_usd": "$64.80 B"},
+            {"commodity": "LNG Imports (Regasified)", "qty_mmt": "2.20", "val_usd_billion": "$1.20 B", "val_inr_crore": "₹10,098 Cr", "fytd_qty_mmt": "10.80", "fytd_val_usd": "$5.90 B"},
+            {"commodity": "Gross Hydrocarbon Imports", "qty_mmt": "23.80", "val_usd_billion": "$14.90 B", "val_inr_crore": "₹1,25,384 Cr", "fytd_qty_mmt": "113.20", "fytd_val_usd": "$70.70 B"},
+            {"commodity": "Petroleum Products (POL) Exports", "qty_mmt": "5.10", "val_usd_billion": "$5.00 B", "val_inr_crore": "₹42,075 Cr", "fytd_qty_mmt": "24.20", "fytd_val_usd": "$23.80 B"},
+            {"commodity": "Net Hydrocarbon Import Bill", "qty_mmt": "18.70", "val_usd_billion": "$11.20 B", "val_inr_crore": "₹83,309 Cr", "fytd_qty_mmt": "89.00", "fytd_val_usd": "$53.40 B"},
         ],
         "table7_self_sufficiency": [
             {"sector": "Crude Oil Self-Sufficiency", "indigenous": "2.30 MMT", "total_req": "23.80 MMT", "import_dependency": "88.2%", "status": "Net Importer"},
@@ -211,10 +211,10 @@ def get_ready_reckoner_dataset(period_id: str = "2026-08") -> Dict[str, Any]:
         ],
         "table25_pricing_tax_buildup": {
             "upstream_benchmarks": [
-                {"benchmark": "Dated Brent Crude Spot", "quote_usd": "0.84 / bbl", "equivalent_inr": "₹8,672.49 / bbl", "source": "ICE Futures & S&P Platts"},
-                {"benchmark": "Oman / Dubai Sour Average", "quote_usd": "9.98 / bbl", "equivalent_inr": "₹8,590.39 / bbl", "source": "Platts & Argus Assessments"},
-                {"benchmark": "Indian Basket Crude (ICB Composite)", "quote_usd": "0.19 / bbl", "equivalent_inr": "₹8,610.44 / bbl", "source": "PPAC Ready Reckoner (75.6% Sour : 24.4% Sweet)"},
-                {"benchmark": "RBI Reference Exchange Rate", "quote_usd": "1 USD", "equivalent_inr": "₹95.47", "source": "Reserve Bank of India (RBI)"},
+                {"benchmark": "Dated Brent Crude Spot", "quote_usd": "$90.84 / bbl", "equivalent_inr": "₹7,644.19 / bbl", "source": "ICE Futures & S&P Platts"},
+                {"benchmark": "Oman / Dubai Sour Average", "quote_usd": "$89.98 / bbl", "equivalent_inr": "₹7,571.82 / bbl", "source": "Platts & Argus Assessments"},
+                {"benchmark": "Indian Basket Crude (ICB Composite)", "quote_usd": "$90.19 / bbl", "equivalent_inr": "₹7,589.50 / bbl", "source": "PPAC Ready Reckoner (75.6% Sour : 24.4% Sweet)"},
+                {"benchmark": "RBI Reference Exchange Rate", "quote_usd": "1 USD", "equivalent_inr": "₹84.15", "source": "Reserve Bank of India (RBI)"},
             ],
             "delhi_petrol_buildup": [
                 {"element": "Base Refinery Price (including Entry Freight)", "inr_litre": "₹58.20", "share_pct": "57.0%"},

@@ -154,7 +154,7 @@ def query_market_pricing(
     icb_res = icb_calc.calculate_icb(
         brent_usd=90.84,
         oman_dubai_usd=89.98,
-        usd_inr_rate=95.47,
+        usd_inr_rate=84.15,
     )
     icb_usd = icb_res["icb_usd_bbl"]
 
@@ -172,7 +172,7 @@ def query_market_pricing(
         oman_dubai_sour_usd_bbl=89.98,
         apm_gas_usd_mmbtu=round(apm_gas_usd, 2),
         hpht_gas_ceiling_usd_mmbtu=8.90,
-        rbi_exchange_rate_inr_usd=95.47,
+        rbi_exchange_rate_inr_usd=84.15,
         delhi_ms_petrol_inr_litre=102.12,
         delhi_hsd_diesel_inr_litre=95.20,
         delhi_lpg_domestic_inr_cylinder=942.00,
@@ -544,7 +544,7 @@ def compile_statutory_report(
     executive_points = [
         "Total POL consumption reached 18,606 TMT (18.61 MMT) in August 2026.",
         "HSD consumption grew +6.8% YoY to 7,023 TMT; MS expanded +8.2% YoY to 3,836 TMT.",
-        "Indian Crude Basket (ICB) averaged $90.19 / bbl with RBI Reference Rate at ₹95.47 / USD.",
+        "Indian Crude Basket (ICB) averaged $90.19 / bbl with RBI Reference Rate at ₹84.15 / USD.",
         "Domestic APM Natural Gas capped at statutory ceiling of $7.00 / MMBTU; HP-HT ceiling at $8.90 / MMBTU.",
         "PMUY budgetary allocation of ₹12,000 Cr successfully absorbed for targeted domestic LPG subsidies.",
     ]

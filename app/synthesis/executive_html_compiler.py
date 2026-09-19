@@ -357,7 +357,7 @@ class ExecutiveHtmlCompiler:
         for r in ds["table6_crude_imports_trade"]:
             cls = ' class="total-row"' if "Net" in r["commodity"] else ""
             lines.append(f'        <tr{cls}><td>{r["commodity"]}</td><td>{r["qty_mmt"]}</td><td>{r["val_usd_billion"]}</td><td>{r["val_inr_crore"]}</td><td>{r["fytd_qty_mmt"]}</td><td>{r["fytd_val_usd"]}</td></tr>')
-        lines.append('    </tbody></table><div class="eia-footnote">Source: DGCIS Customs Border Valuation [3] and Oil Import Clearance Ledgers. Reference exchange rate: ₹95.47 / USD [8].</div>')
+        lines.append('    </tbody></table><div class="eia-footnote">Source: DGCIS Customs Border Valuation [3] and Oil Import Clearance Ledgers. Reference exchange rate: ₹84.15 / USD [8].</div>')
 
         lines.append('    <div class="eia-table-title">Table 7: Self-Sufficiency and Import Dependency in Petroleum Products & Gas <span class="citation-tag">[Source: 2]</span></div>')
         lines.append('    <table class="eia-table"><thead><tr><th>Energy Commodity</th><th>Indigenous Supply</th><th>Total Domestic Processing / Consumption</th><th>Import Dependency %</th><th>Trade Status</th></tr></thead><tbody>')

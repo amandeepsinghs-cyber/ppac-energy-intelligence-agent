@@ -123,12 +123,12 @@ flowchart TD
   > *"Can I see the August 2026 crude benchmarks, gas ceilings, and Delhi retail price breakdown?"*
 * **Engine Actions**:
   - Invokes `query_market_pricing(period_id="2026-08")`.
-  - Executes `IndianCrudeBasketCalculator` (75.6% Oman/Dubai @ $89.98 + 24.4% Dated Brent @ $90.84 = **$90.19 / bbl** at RBI rate ₹95.47/USD).
+  - Executes `IndianCrudeBasketCalculator` (75.6% Oman/Dubai @ $89.98 + 24.4% Dated Brent @ $90.84 = **$90.19 / bbl** at RBI rate ₹84.15/USD).
   - Executes `NaturalGasApmEngine` (enforcing the statutory $7.00/MMBTU ceiling under Kirit Parikh formula).
 * **Expected Output**:
   - **Conversational Narrative**:
     > August 2026 Statutory Benchmark Summary:
-    > • **Indian Crude Basket (ICB)**: **$90.19 / bbl** (₹8,610.44 / bbl) based on 75.6% Oman & Dubai ($89.98) and 24.4% Dated Brent ($90.84).
+    > • **Indian Crude Basket (ICB)**: **$90.19 / bbl** (₹7,589.50 / bbl) based on 75.6% Oman & Dubai ($89.98) and 24.4% Dated Brent ($90.84).
     > • **Domestic Gas APM**: Statutory ceiling enforced at **$7.00 / MMBTU** (vs formula unconstrained $9.00 / MMBTU). Deepwater HP-HT cap at **$8.90 / MMBTU**.
     > • **Delhi Pump Prices**: Petrol ₹102.12/L (VAT ₹16.59), Diesel ₹95.20/L (VAT ₹13.91), Subsidized LPG ₹942.00/14.2kg cylinder.
   - **Gemini Enterprise A2UI Surface**:
@@ -326,7 +326,7 @@ Copy and paste these prompts directly into Gemini Enterprise or the ADK CLI duri
   > *"Can I see the August 2026 crude benchmarks, gas ceilings, and Delhi retail price breakdown?"*
 * **Tool Invoked**: `query_market_pricing(period_id="2026-08")`
 * **Expected Ground-Truth Output**:
-  * **Indian Crude Basket (ICB)**: **$90.19 / bbl** (₹8,610.44 / bbl) at 75.6% Oman/Dubai ($89.98) and 24.4% Brent ($90.84), with RBI Reference Rate at ₹95.47 / USD.
+  * **Indian Crude Basket (ICB)**: **$90.19 / bbl** (₹7,589.50 / bbl) at 75.6% Oman/Dubai ($89.98) and 24.4% Brent ($90.84), with RBI Reference Rate at ₹84.15 / USD.
   * **Domestic Gas APM**: Enforced at statutory ceiling of **$7.00 / MMBTU** under Kirit Parikh formula; deepwater HP-HT ceiling at **$8.90 / MMBTU**.
   * **Delhi Retail Pump Prices**: Petrol ₹102.12/L (VAT ₹16.59), Diesel ₹95.20/L (VAT ₹13.91), Domestic LPG ₹942.00/14.2kg.
 

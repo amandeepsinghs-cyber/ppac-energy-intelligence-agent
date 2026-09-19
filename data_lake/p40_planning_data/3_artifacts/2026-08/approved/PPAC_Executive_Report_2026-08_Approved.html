@@ -155,77 +155,8 @@
             table.eia-table { page-break-inside: avoid; break-inside: avoid; }
             .graphic-container { page-break-inside: avoid; break-inside: avoid; }
         }
-        /* In-Browser HTML Editor Styles */
-        [contenteditable="true"] .eia-table td:hover,
-        [contenteditable="true"] .eia-table th:hover {
-            outline: 2px dashed #2563EB;
-            background-color: #EFF6FF !important;
-            cursor: text;
-        }
-        [contenteditable="true"] .eia-table td:focus,
-        [contenteditable="true"] .eia-table th:focus {
-            outline: 2px solid #1D4ED8;
-            background-color: #DBEAFE !important;
-        }
-        [contenteditable="true"] p:hover,
-        [contenteditable="true"] li:hover,
-        [contenteditable="true"] .metric-val:hover {
-            outline: 1.5px dashed #93C5FD;
-            cursor: text;
-        }
-        .editor-status-pill {
-            display: inline-flex; align-items: center; gap: 6px;
-            background: #ECFDF5; color: #065F46; border: 1px solid #A7F3D0;
-            padding: 4px 10px; border-radius: 9999px; font-size: 11.5px; font-weight: 600;
-        }
     </style>
     <script>
-        function makeReportEditable() {
-            const sheet = document.querySelector('.publication-sheet');
-            if (!sheet) return;
-            sheet.setAttribute('contenteditable', 'true');
-            sheet.addEventListener('input', () => {
-                localStorage.setItem('ppac_sovereign_report_2026_08_edits', sheet.innerHTML);
-                const status = document.getElementById('saveStatus');
-                if (status) {
-                    status.innerHTML = '🟡 Unsaved Edits';
-                    status.style.background = '#FEF3C7';
-                    status.style.color = '#92400E';
-                }
-            });
-        }
-
-        function saveEditsLocally() {
-            const sheet = document.querySelector('.publication-sheet');
-            if (!sheet) return;
-            localStorage.setItem('ppac_sovereign_report_2026_08_edits', sheet.innerHTML);
-            const status = document.getElementById('saveStatus');
-            if (status) {
-                status.innerHTML = '🟢 Edits Saved Locally';
-                status.style.background = '#ECFDF5';
-                status.style.color = '#065F46';
-            }
-            alert('All your edits have been saved to your browser storage! They will remain in place whenever you reopen this report.');
-        }
-
-        function resetToOriginal() {
-            if (confirm('Revert all edits back to the official Ministry draft numbers?')) {
-                localStorage.removeItem('ppac_sovereign_report_2026_08_edits');
-                location.reload();
-            }
-        }
-
-        function downloadEditedHtml() {
-            const fullHtml = document.documentElement.outerHTML;
-            const blob = new Blob([fullHtml], { type: 'text/html;charset=utf-8' });
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = 'PPAC_Executive_Report_2026-08_Edited.html';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        }
-
         function copyForGoogleDocs() {
             const sheet = document.querySelector('.publication-sheet');
             const range = document.createRange();
@@ -234,39 +165,20 @@
             window.getSelection().addRange(range);
             try {
                 document.execCommand('copy');
-                alert('Report copied to clipboard! You can open docs.new and press Ctrl+V to paste with full table formatting.');
+                alert('Report copied to clipboard! You can now open a new Google Doc (docs.new) and press Ctrl+V to paste with 100% table and text formatting preserved.');
             } catch (err) {
                 alert('Please press Ctrl+A then Ctrl+C inside the report sheet to copy for Google Docs.');
             }
             window.getSelection().removeAllRanges();
         }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            const saved = localStorage.getItem('ppac_sovereign_report_2026_08_edits');
-            if (saved) {
-                const sheet = document.querySelector('.publication-sheet');
-                if (sheet) sheet.innerHTML = saved;
-                const status = document.getElementById('saveStatus');
-                if (status) {
-                    status.innerHTML = '🟢 Restored Saved Edits';
-                }
-            }
-            makeReportEditable();
-        });
     </script>
 </head>
 <body>
     <div class="chromebook-bar">
-        <div class="chromebook-bar-title">
-            <span>📄 PPAC Sovereign Hydrocarbon Report · Live Browser Editor</span>
-            <span id="saveStatus" class="editor-status-pill">🟢 Live In-Browser Editing Active</span>
-        </div>
+        <div class="chromebook-bar-title">📄 PPAC Official Sovereign Hydrocarbon Report · Chromebook & Google Docs Optimized View</div>
         <div class="chromebook-bar-actions">
-            <button class="doc-btn" onclick="saveEditsLocally()" style="background: #059669;" title="Save your changes locally">💾 Save Edits</button>
-            <button class="doc-btn" onclick="downloadEditedHtml()" style="background: #4F46E5;" title="Download edited HTML file">📥 Download HTML</button>
-            <button class="doc-btn doc-btn-secondary" onclick="resetToOriginal()" title="Restore the official Ministry draft">🔄 Reset</button>
-            <button class="doc-btn doc-btn-secondary" onclick="window.print()" title="Print or save as PDF">🖨 Print / PDF</button>
-            <button class="doc-btn doc-btn-secondary" onclick="copyForGoogleDocs()" title="Copy formatted tables for Docs">📋 Copy for Docs</button>
+            <button class="doc-btn" onclick="copyForGoogleDocs()">📋 Copy for Google Docs</button>
+            <button class="doc-btn doc-btn-secondary" onclick="window.print()">🖨 Print / Save as PDF</button>
         </div>
     </div>
 <div class="publication-sheet">
@@ -364,12 +276,12 @@
     </tbody></table><div class="eia-footnote">Source: PPAC Table 5 [2], Refinery Crude Intake Ledgers [6]. Average crude API: 31.8° · Sulphur content: 1.62% wt.</div>
     <div class="eia-table-title">Table 6: Quantity and Value of Crude Oil Imports & Net Hydrocarbon Trade Bill <span class="citation-tag">[Source: 3, 8]</span></div>
     <table class="eia-table"><thead><tr><th>Hydrocarbon Trade Stream</th><th>Quantity (MMT)</th><th>Value (USD Billion)</th><th>Value (INR Crore)</th><th>FYTD Qty (MMT)</th><th>FYTD Value (USD B)</th></tr></thead><tbody>
-        <tr><td>Crude Oil Imports</td><td>21.60</td><td>3.70</td><td>₹1,30,794</td><td>102.40</td><td>4.80 B</td></tr>
-        <tr><td>LNG Imports (Regasified)</td><td>2.20</td><td>.20</td><td>₹11,456</td><td>10.80</td><td>.90 B</td></tr>
-        <tr><td>Gross Hydrocarbon Imports</td><td>23.80</td><td>4.90</td><td>₹1,42,250</td><td>113.20</td><td>0.70 B</td></tr>
-        <tr><td>Petroleum Products (POL) Exports</td><td>5.10</td><td>.00</td><td>₹47,735</td><td>24.20</td><td>3.80 B</td></tr>
-        <tr class="total-row"><td>Net Hydrocarbon Import Bill</td><td>18.70</td><td>1.20</td><td>₹1,06,926</td><td>89.00</td><td>3.40 B</td></tr>
-    </tbody></table><div class="eia-footnote">Source: DGCIS Customs Border Valuation [3] and Oil Import Clearance Ledgers. Reference exchange rate: ₹95.47 / USD [8].</div>
+        <tr><td>Crude Oil Imports</td><td>21.60</td><td>$13.70 B</td><td>₹1,15,286 Cr</td><td>102.40</td><td>$64.80 B</td></tr>
+        <tr><td>LNG Imports (Regasified)</td><td>2.20</td><td>$1.20 B</td><td>₹10,098 Cr</td><td>10.80</td><td>$5.90 B</td></tr>
+        <tr><td>Gross Hydrocarbon Imports</td><td>23.80</td><td>$14.90 B</td><td>₹1,25,384 Cr</td><td>113.20</td><td>$70.70 B</td></tr>
+        <tr><td>Petroleum Products (POL) Exports</td><td>5.10</td><td>$5.00 B</td><td>₹42,075 Cr</td><td>24.20</td><td>$23.80 B</td></tr>
+        <tr class="total-row"><td>Net Hydrocarbon Import Bill</td><td>18.70</td><td>$11.20 B</td><td>₹83,309 Cr</td><td>89.00</td><td>$53.40 B</td></tr>
+    </tbody></table><div class="eia-footnote">Source: DGCIS Customs Border Valuation [3] and Oil Import Clearance Ledgers. Reference exchange rate: ₹84.15 / USD [8].</div>
     <div class="eia-table-title">Table 7: Self-Sufficiency and Import Dependency in Petroleum Products & Gas <span class="citation-tag">[Source: 2]</span></div>
     <table class="eia-table"><thead><tr><th>Energy Commodity</th><th>Indigenous Supply</th><th>Total Domestic Processing / Consumption</th><th>Import Dependency %</th><th>Trade Status</th></tr></thead><tbody>
         <tr><td>Crude Oil Self-Sufficiency</td><td>2.30 MMT</td><td>23.80 MMT</td><td><strong>88.2%</strong></td><td>Net Importer</td></tr>
@@ -595,7 +507,7 @@
         </div>
         <div style="text-align:right;">
             <span class="badge-pass" style="font-size:12px; padding:5px 12px;">STATUS: APPROVED FOR STATUTORY GAZETTE</span><br>
-            <span style="font-size:11px; color:#64748B; margin-top:5px; display:inline-block;">Digital Signature Hash: SHA256:1eaf21a03391e1e6</span>
+            <span style="font-size:11px; color:#64748B; margin-top:5px; display:inline-block;">Digital Signature Hash: SHA256:22d6ee1914036836</span>
         </div>
     </div>
     <div class="eia-section-title">Section 7: Statutory Data Sources & Numbered Citations</div>

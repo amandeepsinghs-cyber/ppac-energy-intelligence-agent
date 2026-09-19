@@ -3,5 +3,12 @@
   "deployment_target": "agent_runtime",
   "is_a2a": true,
   "agent_directory": "app",
-  "deployment_timestamp": "2026-09-19T18:20:57.850956+00:00"
+  "deployment_timestamp": "2026-09-19T18:20:57.850956+00:00",
+  "pending_operation": {
+    "operation_name": "projects/349946979746/locations/asia-south1/reasoningEngines/5487856048276504576/operations/8145775050209886208",
+    "project": "og-agentic-ecosystem",
+    "location": "asia-south1",
+    "deployment_target": "agent_runtime",
+    "started_at": "2026-09-19T18:54:19.515318+00:00"
+  }
 }

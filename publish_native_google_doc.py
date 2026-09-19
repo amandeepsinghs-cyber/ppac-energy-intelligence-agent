@@ -97,7 +97,7 @@ def generate_markdown(period_id="2026-08") -> str:
     lines.append("|---|---|---|---|---|---|")
     for r in ds["table6_crude_imports_trade"]:
         lines.append(f"| {r['commodity']} | {r['qty_mmt']} | {r['val_usd_billion']} | {r['val_inr_crore']} | {r['fytd_qty_mmt']} | {r['fytd_val_usd']} |")
-    lines.append("*Source: DGCIS Customs Border Clearance [3], RBI Exchange Rate (₹95.47/USD) [8].*\n")
+    lines.append("*Source: DGCIS Customs Border Clearance [3], RBI Exchange Rate (₹84.15/USD) [8].*\n")
     
     lines.append("### Table 7: Self-Sufficiency & Import Dependency in Petroleum Products [Source: 2]")
     lines.append("| Energy Commodity | Indigenous Supply | Total Domestic Req | Import Dependency % | Trade Status |")

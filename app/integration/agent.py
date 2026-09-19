@@ -230,7 +230,7 @@ root_agent = Agent(
         "- Indian Crude Basket (ICB): $90.19 / bbl (Oman/Dubai sour $89.98 @ 75.6%, Dated Brent $90.84 @ 24.4%).\n"
         "- Domestic APM Natural Gas: $7.00 / MMBTU ceiling (Kirit Parikh formula).\n"
         "- Deepwater HP-HT Ceiling: $8.90 / MMBTU.\n"
-        "- RBI Reference Rate: ₹95.47 / USD.\n"
+        "- RBI Reference Rate: ₹84.15 / USD.\n"
         "- Delhi Pump Prices: Petrol ₹102.12 / L, Diesel ₹95.20 / L, Domestic LPG ₹942.00 / cylinder.\n\n"
         "TOOLS:\n"
         "- inspect_sovereign_lake: Queries gs://og-sovereign-ppac-data to audit PSU submissions (IOCL, BPCL, HPCL, ONGC, GAIL) and quarantine ledger.\n"
