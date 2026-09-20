@@ -56,13 +56,14 @@ The agent is designed to answer both strategic macroeconomic questions and granu
 #### Incremental Sovereign Lifecycle (Intake ➔ Baseline ➔ Pricing ➔ Forecasting ➔ Statutory Release)
 1. **Intake & Lake Audit**: *"What is the status of August 2026 PSU submissions across IOCL, BPCL, HPCL, ONGC, and GAIL in our sovereign data lake?"*
 2. **Historical Baseline & Seasonality**: *"What is the 5-year historical consumption trend for High Speed Diesel and Petrol, and how does agricultural/festive seasonality impact it?"*
-3. **Statutory Pricing & Formula Compliance**: *"Can I see the August 2026 crude benchmarks, is domestic natural gas compliant with the Kirit Parikh $7.00/MMBTU ceiling, and what is the Delhi pump price build-up?"*
+3. **Statutory Pricing & Formula Compliance**: *"What are the official August 2026 Indian Crude Basket benchmarks and domestic natural gas statutory price ceilings?"*
 4. **Forward Econometric Forecasting (Second to Last)**: *"What is the projected 12-month SARIMAX demand trajectory for High Speed Diesel, accounting for monsoon harvesting and festival seasonality?"*
-5. **Statutory Report Synthesis & Certification (Final)**: *"Can you generate, certify, and publish the official August 2026 Monthly Ready Reckoner executive report with all 6 governance checks?"*
+5. **Statutory Report Synthesis & Certification (Final)**: *"Compile and publish the official August 2026 PPAC Executive Report"*
 
 #### Strategic Macroeconomic & Audit Deep Dives
 * **Crude Import Dependency**: *"What is India's current crude import dependency percentage, and how has our crude import bill trended over the last 12 months?"*
 * **Subsidy Fiscal Exposure**: *"How much fiscal exposure is MoPNG carrying under the Pradhan Mantri Ujjwala Yojana (PMUY) LPG subsidy at current international benchmark prices?"*
+* **Retail Fuel Tax Build-Up**: *"What is the retail pump price build-up at Delhi for Petrol and Diesel, and what are the Central Excise and State VAT shares?"*
 * **Governance & Quarantine**: *"Are there any unresolved anomaly quarantine exceptions or mass-balance parity mismatches across refinery throughput and consumption?"*
 * **Statutory Provenance Lineage**: *"What is the statutory source and provenance behind our Indian Crude Basket weighting and retail pump price build-up across major metros?"*
 
@@ -76,9 +77,9 @@ This conversational walkthrough demonstrates how Gemini Enterprise serves as the
 flowchart TD
     Turn1["Turn 1: Sovereign Lake Audit\n'What is the status of August 2026 PSU submissions?'\n👉 Renders A2UI Lake Inventory Card"]
     Turn2["Turn 2: Historical Demand Baseline\n'What is the 5-year historical consumption trend for HSD?'\n👉 Renders Native Interactive VegaChart & FY Table"]
-    Turn3["Turn 3: Statutory Benchmark Pricing\n'Show August 2026 crude benchmarks & Delhi fuel prices'\n👉 Renders Native Interactive VegaChart & Pricing Table"]
+    Turn3["Turn 3: Statutory Benchmark Pricing\n'What are official August 2026 crude benchmarks & gas ceilings?'\n👉 Renders Native Interactive VegaChart & Pricing Table"]
     Turn4["Turn 4: 12-Month SARIMAX Forecast (Second to Last)\n'Run 12-month SARIMAX demand forecast for High Speed Diesel'\n👉 Renders Native Interactive VegaChart with 95% Bounds & Projection Matrix"]
-    Turn5["Turn 5: Statutory Report Synthesis (Final)\n'Compile and publish the official August 2026 Executive Report'\n👉 Renders A2UI Report Release Card with Google Docs Link"]
+    Turn5["Turn 5: Statutory Report Synthesis (Final)\n'Compile and publish the official August 2026 PPAC Executive Report'\n👉 Renders A2UI Report Release Card with Live Editable HTML Link"]
 
     Turn1 --> Turn2 --> Turn3 --> Turn4 --> Turn5
 ```
@@ -118,21 +119,21 @@ flowchart TD
 
 ---
 
-### Turn 3: Market Commodity Benchmarks & Retail Pump Build-Up
+### Turn 3: Market Commodity Benchmarks & Statutory Ceilings
 * **Executive Prompt**:
-  > *"Can I see the August 2026 crude benchmarks, gas ceilings, and Delhi retail price breakdown?"*
+  > *"What are the official August 2026 Indian Crude Basket benchmarks and domestic natural gas statutory price ceilings?"*
 * **Engine Actions**:
-  - Invokes `query_market_pricing(period_id="2026-08")`.
+  - Invokes `query_market_pricing(period_id="2026-08", focus="crude")`.
   - Executes `IndianCrudeBasketCalculator` (75.6% Oman/Dubai @ $89.98 + 24.4% Dated Brent @ $90.84 = **$90.19 / bbl** at RBI rate ₹84.15/USD).
-  - Executes `NaturalGasApmEngine` (enforcing the statutory $7.00/MMBTU ceiling under Kirit Parikh formula).
+  - Executes `NaturalGasApmEngine` (enforcing statutory **$7.00 / MMBTU** ceiling under Kirit Parikh formula, alongside Deepwater HP-HT cap at **$8.90 / MMBTU**).
 * **Expected Output**:
   - **Conversational Narrative**:
     > August 2026 Statutory Benchmark Summary:
-    > • **Indian Crude Basket (ICB)**: **$90.19 / bbl** (₹7,589.50 / bbl) based on 75.6% Oman & Dubai ($89.98) and 24.4% Dated Brent ($90.84).
+    > • **Indian Crude Basket (ICB)**: **$90.19 / bbl** (₹7,589.50 / bbl) based on 75.6% Oman & Dubai ($89.98) and 24.4% Dated Brent ($90.84). This is a sovereign national benchmark.
     > • **Domestic Gas APM**: Statutory ceiling enforced at **$7.00 / MMBTU** (vs formula unconstrained $9.00 / MMBTU). Deepwater HP-HT cap at **$8.90 / MMBTU**.
-    > • **Delhi Pump Prices**: Petrol ₹102.12/L (VAT ₹16.59), Diesel ₹95.20/L (VAT ₹13.91), Subsidized LPG ₹942.00/14.2kg cylinder.
+    > • *(Downstream Inquiry)*: Retail pump prices are city-specific (at Delhi: Petrol ₹102.12/L, Diesel ₹95.20/L, Subsidized LPG ₹942.00/14.2kg cylinder).
   - **Gemini Enterprise A2UI Surface**:
-    - **Native Interactive Pricing Matrix Card**: Interactive A2UI `VegaChart` multi-benchmark horizontal bars (Crude benchmarks $/bbl, Delhi pump build-up ₹/L, Natural gas ceilings $/MMBTU, POL demand TMT) paired with a complete statutory price build-up matrix table.
+    - **Native Interactive Pricing Matrix Card**: Interactive A2UI `VegaChart` horizontal benchmark comparison ($/bbl and $/MMBTU with shared scaling and hover tooltips) paired with a complete statutory price build-up matrix table.
 
 ---
 
@@ -158,24 +159,26 @@ flowchart TD
 
 ### Turn 5: Statutory Report Synthesis & Artifact Delivery (Final)
 * **Executive Prompt**:
-  > *"Compile and publish the official August 2026 PPAC Executive Report to Google Docs."*
+  > *"Compile and publish the official August 2026 PPAC Executive Report"*
 * **Engine Actions**:
-  - Invokes `compile_statutory_report(period_id="2026-08")` & `publish_report_to_google_docs`.
-  - Synthesizes the styled 15-page HTML dashboard, native Google Doc, and executive Word DOCX.
+  - Invokes `compile_statutory_report(period_id="2026-08")`.
+  - Synthesizes the interactive, live-editable 15-page HTML dashboard and executive Word DOCX.
   - Incorporates official MoPNG branding: Three Lions State Emblem of India, 1:1 scaled PPAC 25-Year Jubilee emblem, uncrowded leader-line charts, and T+1 publication cadence.
   - Uploads approved artifacts to `gs://og-sovereign-ppac-data/3_artifacts/2026-08/approved/`.
 * **Expected Output**:
   - **Conversational Narrative**:
-    > **August 2026 Monthly Ready Reckoner Executive Report** has been synthesized and certified:
-    > • **Statutory Compliance**: Synthesized with authentic MoPNG masthead, 10 official Monthly Highlights, 27 structured data tables, and 10 numbered citations.
-    > • **Publication Cadence**: Publication Month August 2026 (`Aug 26`) analyzing historical ground-truth for July 2026 (`Data for July’2026`).
-    > • **Available Formats**: Native Google Docs Edition, HTML Sovereign Dashboard, and Word (`.docx`) Edition.
-    > • **Direct Google Docs Link**: [PPAC August 2026 Report (Google Docs)](https://docs.google.com/document/d/1Ra0pXfO9qu5b8hvTfWJhSZlbR3bWBKRZNV-98MkS2Io/edit)
+    > The official August 2026 PPAC Executive Report has been successfully compiled and approved. It is available as an interactive, live-editable sovereign report at: [https://storage.cloud.google.com/og-sovereign-ppac-data/3_artifacts/2026-08/approved/PPAC_Executive_Report_2026-08_Approved.html](https://storage.cloud.google.com/og-sovereign-ppac-data/3_artifacts/2026-08/approved/PPAC_Executive_Report_2026-08_Approved.html)
+    >
+    > Key highlights from the report:
+    > • Total POL consumption reached 18,606 TMT (18.61 MMT) in August 2026.
+    > • HSD consumption grew +6.8% YoY to 7,023 TMT; MS expanded +8.2% YoY to 3,836 TMT.
+    > • Indian Crude Basket (ICB) averaged $90.19 / bbl with RBI Reference Rate at ₹84.15 / USD.
+    > • Domestic APM Natural Gas capped at statutory ceiling of $7.00 / MMBTU; HP-HT ceiling at $8.90 / MMBTU.
+    > • PMUY budgetary allocation of ₹12,000 Cr successfully absorbed for targeted domestic LPG subsidies.
   - **Gemini Enterprise A2UI Surface**:
-    - **Report Release Card**: Visual summary of key metrics, green governance status pill, and direct links:
-      - **Google Docs**: [Official August 2026 Report](https://docs.google.com/document/d/1Ra0pXfO9qu5b8hvTfWJhSZlbR3bWBKRZNV-98MkS2Io/edit)
-      - `gs://og-sovereign-ppac-data/3_artifacts/2026-08/approved/PPAC_Executive_Report_2026-08_Approved.html`
-      - `gs://og-sovereign-ppac-data/3_artifacts/2026-08/approved/PPAC_Executive_Report_2026-08_Approved.docx`
+    - **Report Release Card**: Visual summary of key metrics, green governance status pill, and direct access links:
+      - **Interactive In-Browser Editable HTML**: `gs://og-sovereign-ppac-data/3_artifacts/2026-08/approved/PPAC_Executive_Report_2026-08_Approved.html`
+      - **Executive Word DOCX**: `gs://og-sovereign-ppac-data/3_artifacts/2026-08/approved/PPAC_Executive_Report_2026-08_Approved.docx`
 
 ---
 

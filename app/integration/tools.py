@@ -573,7 +573,6 @@ def compile_statutory_report(
         "period_id": period_id,
         "title": summary.title,
         "status": summary.status,
-        "google_docs_url": "https://docs.google.com/document/d/1Ra0pXfO9qu5b8hvTfWJhSZlbR3bWBKRZNV-98MkS2Io/edit",
         "html_dashboard_url": html_web_url,
         "html_artifact": html_uri,
         "docx_artifact": docx_uri,

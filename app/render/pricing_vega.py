@@ -49,7 +49,7 @@ def build_pricing_vega_spec(summary: MarketBenchmarkSummary) -> Dict[str, Any]:
                 "tooltip": [
                     {"field": "fuel", "type": "nominal", "title": "Fuel"},
                     {"field": "component", "type": "nominal", "title": "Component"},
-                    {"field": "amount", "type": "quantitative", "title": "Amount (₹/L)", "format": "₹.2f"},
+                    {"field": "amount", "type": "quantitative", "title": "Amount (₹/L)", "format": ",.2f"},
                 ],
             },
         }
@@ -65,6 +65,7 @@ def build_pricing_vega_spec(summary: MarketBenchmarkSummary) -> Dict[str, Any]:
             "width": 420,
             "height": 160,
             "padding": {"left": 10, "right": 20, "top": 10, "bottom": 10},
+            "resolve": {"scale": {"y": "shared"}},
             "data": {"values": plot_data},
             "layer": [
                 {
@@ -80,7 +81,7 @@ def build_pricing_vega_spec(summary: MarketBenchmarkSummary) -> Dict[str, Any]:
                     "encoding": {
                         "y": {"field": "benchmark", "type": "nominal", "sort": "-x"},
                         "x": {"field": "price", "type": "quantitative"},
-                        "text": {"field": "price", "type": "quantitative", "format": "$.2f"},
+                        "text": {"field": "price", "type": "quantitative", "format": "$,.2f"},
                     },
                 },
             ],
@@ -100,6 +101,7 @@ def build_pricing_vega_spec(summary: MarketBenchmarkSummary) -> Dict[str, Any]:
             "width": 420,
             "height": 190,
             "padding": {"left": 10, "right": 20, "top": 10, "bottom": 10},
+            "resolve": {"scale": {"y": "shared"}},
             "data": {"values": plot_data},
             "layer": [
                 {
@@ -139,6 +141,7 @@ def build_pricing_vega_spec(summary: MarketBenchmarkSummary) -> Dict[str, Any]:
             "width": 420,
             "height": 170,
             "padding": {"left": 10, "right": 20, "top": 10, "bottom": 10},
+            "resolve": {"scale": {"y": "shared"}},
             "data": {"values": crude_pts},
             "layer": [
                 {
@@ -148,7 +151,7 @@ def build_pricing_vega_spec(summary: MarketBenchmarkSummary) -> Dict[str, Any]:
                         "x": {
                             "field": "price",
                             "type": "quantitative",
-                            "axis": {"title": "Price (USD / bbl)", "format": "$.2f", "grid": True},
+                            "axis": {"title": "Price (USD / bbl)", "format": "$,.2f", "grid": True},
                             "scale": {"domain": [domain_min, domain_max], "zero": False, "nice": True},
                         },
                         "color": {
@@ -167,7 +170,7 @@ def build_pricing_vega_spec(summary: MarketBenchmarkSummary) -> Dict[str, Any]:
                     "encoding": {
                         "y": {"field": "benchmark", "type": "nominal", "sort": "-x"},
                         "x": {"field": "price", "type": "quantitative"},
-                        "text": {"field": "price", "type": "quantitative", "format": "$.2f"},
+                        "text": {"field": "price", "type": "quantitative", "format": "$,.2f"},
                     },
                 },
             ],
