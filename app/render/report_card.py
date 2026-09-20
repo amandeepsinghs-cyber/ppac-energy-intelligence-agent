@@ -48,7 +48,7 @@ def build_report_artifact_components(summary: ReportArtifactSummary) -> List[Dic
 
     # Download & Google Docs links
     add(_text("rep-dl-hdr", "Verified Statutory Artifacts & Sovereign Reports", "h5"))
-    gdocs_url = summary.google_docs_url or "https://docs.google.com/document/d/1_ksVknabzsOGaxUWeVOYcx45FZUSnWEtusoSAmvcTeg/edit"
+    gdocs_url = summary.google_docs_url or "https://docs.google.com/document/d/1Ra0pXfO9qu5b8hvTfWJhSZlbR3bWBKRZNV-98MkS2Io/edit"
     html_url = summary.html_web_url or f"https://storage.cloud.google.com/og-sovereign-ppac-data/3_artifacts/{summary.period_id}/approved/PPAC_Executive_Report_{summary.period_id}_Approved.html"
     docx_url = summary.docx_web_url or f"https://storage.cloud.google.com/og-sovereign-ppac-data/3_artifacts/{summary.period_id}/approved/PPAC_Executive_Report_{summary.period_id}_Approved.docx"
 

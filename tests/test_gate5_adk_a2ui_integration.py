@@ -257,6 +257,26 @@ def test_callback_scrubbing_and_emission():
     assert len(surface_content.parts) == 2  # createSurface + updateComponents
     assert mock_ctx.state.get(PENDING_PRICING_KEY) is None
 
+    # Test emit_a2ui_surface for PENDING_INVENTORY_KEY with dict serialization
+    inv_dict = {
+        "bucket": "og-sovereign-ppac-data",
+        "region": "asia-south1",
+        "total_objects": 42,
+        "raw_psu_submissions": [{"name": "iocl.xlsx", "size_bytes": 1024, "updated": "2026-08-01"}],
+        "raw_official_pubs": [{"name": "ppac_rr.pdf", "size_bytes": 2048, "updated": "2026-08-01"}],
+        "curated_datasets": [{"name": "consumption.csv", "size_bytes": 4096, "updated": "2026-08-01"}],
+        "artifacts": [{"name": "report.html", "size_bytes": 8192, "updated": "2026-08-01"}],
+        "quarantine": [],
+        "ok": True,
+        "error": None,
+    }
+    mock_ctx_inv = MagicMock()
+    mock_ctx_inv.state = MockAdkState({PENDING_INVENTORY_KEY: inv_dict})
+    inv_surface = emit_a2ui_surface(callback_context=mock_ctx_inv)
+    assert inv_surface is not None
+    assert len(inv_surface.parts) == 2
+    assert mock_ctx_inv.state.get(PENDING_INVENTORY_KEY) is None
+
 
 def test_historical_demand_tool_and_card_a2ui():
     mock_ctx = MagicMock()

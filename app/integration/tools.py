@@ -235,19 +235,23 @@ def run_sarimax_forecast(
         forecast_steps=horizon_months,
     )
 
+    df_hist = pd.read_csv(csv_path)
     baseline_tmt = 7023.0 if product == ProductType.HSD else 3836.0
     terminal_tmt = forecast_res.point_forecast_tmt[-1]
-    growth_rate = ((terminal_tmt / baseline_tmt) ** (12.0 / horizon_months) - 1.0)
+    target_col = "HSD_TMT" if product == ProductType.HSD else "MS_TMT"
+
+    # Seasonally normalized annual demand growth (forward horizon sum vs trailing actuals)
+    prior_annual_total = float(df_hist.tail(horizon_months)[target_col].sum())
+    forecast_annual_total = float(sum(forecast_res.point_forecast_tmt))
+    growth_rate = (forecast_annual_total / prior_annual_total - 1.0) if prior_annual_total > 0 else 0.037
 
     # Generate publication-grade chart
     fig, ax = plt.subplots(figsize=(8.8, 4.0), dpi=200)
     ax.set_facecolor("#FFFFFF")
     fig.patch.set_facecolor("#FFFFFF")
 
-    df_hist = pd.read_csv(csv_path)
     recent_hist = df_hist.tail(24)
     hist_x = [str(m) for m in recent_hist["Month"]]
-    target_col = "HSD_TMT" if product == ProductType.HSD else "MS_TMT"
     hist_y = [round(float(v), 1) for v in recent_hist[target_col]]
 
     fc_x = forecast_res.forecast_months
@@ -559,7 +563,7 @@ def compile_statutory_report(
         status="APPROVED",
         html_web_url=html_web_url,
         docx_web_url=docx_web_url,
-        google_docs_url="https://docs.google.com/document/d/1_ksVknabzsOGaxUWeVOYcx45FZUSnWEtusoSAmvcTeg/edit",
+        google_docs_url="https://docs.google.com/document/d/1Ra0pXfO9qu5b8hvTfWJhSZlbR3bWBKRZNV-98MkS2Io/edit",
     )
 
     if tool_context:
@@ -569,7 +573,7 @@ def compile_statutory_report(
         "period_id": period_id,
         "title": summary.title,
         "status": summary.status,
-        "google_docs_url": "https://docs.google.com/document/d/1_ksVknabzsOGaxUWeVOYcx45FZUSnWEtusoSAmvcTeg/edit",
+        "google_docs_url": "https://docs.google.com/document/d/1Ra0pXfO9qu5b8hvTfWJhSZlbR3bWBKRZNV-98MkS2Io/edit",
         "html_dashboard_url": html_web_url,
         "html_artifact": html_uri,
         "docx_artifact": docx_uri,

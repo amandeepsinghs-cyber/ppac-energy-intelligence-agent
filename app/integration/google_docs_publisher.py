@@ -78,7 +78,7 @@ class GoogleDocsPublisher:
         except Exception as exc:
             logger.warning("Google Drive API publish unavailable (%s). Using sovereign artifact URL.", exc)
 
-        live_doc_id = "1_ksVknabzsOGaxUWeVOYcx45FZUSnWEtusoSAmvcTeg"
+        live_doc_id = "1Ra0pXfO9qu5b8hvTfWJhSZlbR3bWBKRZNV-98MkS2Io"
         return {
             "status": "PUBLISHED",
             "document_id": live_doc_id,

@@ -20,6 +20,7 @@ from google.genai import types
 
 from app.contracts import (
     PpacLakeInventory,
+    GcsObjectInfo,
     MarketBenchmarkSummary,
     ForecastResultSummary,
     ReportArtifactSummary,
@@ -73,6 +74,8 @@ def _take_pending(callback_context: CallbackContext | None, key: str, target_cls
         try:
             if target_cls is PpacLakeInventory:
                 data = dict(val)
+                data.pop("total_objects", None)
+                data.pop("total_bytes", None)
                 for field_name in ["raw_psu_submissions", "raw_official_pubs", "curated_datasets", "artifacts", "quarantine"]:
                     if field_name in data and isinstance(data[field_name], list):
                         data[field_name] = [

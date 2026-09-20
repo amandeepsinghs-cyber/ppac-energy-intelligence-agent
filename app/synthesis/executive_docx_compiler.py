@@ -93,30 +93,55 @@ class ExecutiveDocxCompiler:
         )
 
         # ----------------------------------------------------------------------
-        # 0. RED DRAFT FOR REVIEW BANNER & LATENCY TRANSFORMATION HERO BLOCK
+        # 0. DRAFT / OFFICIAL STATUTORY PUBLICATION HERO BANNER
         # ----------------------------------------------------------------------
-        draft_table = doc.add_table(rows=1, cols=1)
-        draft_table.alignment = WD_TABLE_ALIGNMENT.CENTER
-        c_draft = draft_table.cell(0, 0)
-        c_draft.width = Inches(6.9)
-        self._set_cell_shading(c_draft, self.HEX_CRIMSON_BG)
-        self._set_cell_margins(c_draft, top=140, bottom=140, left=180, right=180)
+        active_anomalies = [a for a in anomalies if not a.is_resolved]
+        if active_anomalies:
+            draft_table = doc.add_table(rows=1, cols=1)
+            draft_table.alignment = WD_TABLE_ALIGNMENT.CENTER
+            c_draft = draft_table.cell(0, 0)
+            c_draft.width = Inches(6.9)
+            self._set_cell_shading(c_draft, self.HEX_CRIMSON_BG)
+            self._set_cell_margins(c_draft, top=140, bottom=140, left=180, right=180)
 
-        p_draft = c_draft.paragraphs[0]
-        p_draft.alignment = WD_ALIGN_PARAGRAPH.CENTER
-        r_dtitle = p_draft.add_run("⚠ DRAFT FOR REVIEW ⚠\n")
-        r_dtitle.font.name = "Calibri"
-        r_dtitle.font.size = Pt(16)
-        r_dtitle.font.bold = True
-        r_dtitle.font.color.rgb = self.CRIMSON
+            p_draft = c_draft.paragraphs[0]
+            p_draft.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            r_dtitle = p_draft.add_run("⚠ DRAFT FOR REVIEW ⚠\n")
+            r_dtitle.font.name = "Calibri"
+            r_dtitle.font.size = Pt(16)
+            r_dtitle.font.bold = True
+            r_dtitle.font.color.rgb = self.CRIMSON
 
-        r_dsub = p_draft.add_run("PROVISIONAL AUTOMATED RELEASE • UNAUDITED STATUTORY DRAFT • FOR MoPNG STRATEGIC REVIEW ONLY\n")
-        r_dsub.font.name = "Calibri"
-        r_dsub.font.size = Pt(8.5)
-        r_dsub.font.bold = True
-        r_dsub.font.color.rgb = self.CRIMSON
+            r_dsub = p_draft.add_run("PROVISIONAL AUTOMATED RELEASE • UNAUDITED STATUTORY DRAFT • FOR MoPNG STRATEGIC REVIEW ONLY\n")
+            r_dsub.font.name = "Calibri"
+            r_dsub.font.size = Pt(8.5)
+            r_dsub.font.bold = True
+            r_dsub.font.color.rgb = self.CRIMSON
 
-        doc.add_paragraph().paragraph_format.space_after = Pt(4)
+            doc.add_paragraph().paragraph_format.space_after = Pt(4)
+        else:
+            appr_table = doc.add_table(rows=1, cols=1)
+            appr_table.alignment = WD_TABLE_ALIGNMENT.CENTER
+            c_appr = appr_table.cell(0, 0)
+            c_appr.width = Inches(6.9)
+            self._set_cell_shading(c_appr, self.HEX_EMERALD_BG)
+            self._set_cell_margins(c_appr, top=140, bottom=140, left=180, right=180)
+
+            p_appr = c_appr.paragraphs[0]
+            p_appr.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            r_atitle = p_appr.add_run("✔ OFFICIAL STATUTORY PUBLICATION ✔\n")
+            r_atitle.font.name = "Calibri"
+            r_atitle.font.size = Pt(15)
+            r_atitle.font.bold = True
+            r_atitle.font.color.rgb = self.EMERALD
+
+            r_asub = p_appr.add_run("PETROLEUM PLANNING & ANALYSIS CELL • MINISTRY OF PETROLEUM & NATURAL GAS, GOVT OF INDIA • APPROVED FOR RELEASE\n")
+            r_asub.font.name = "Calibri"
+            r_asub.font.size = Pt(8.5)
+            r_asub.font.bold = True
+            r_asub.font.color.rgb = self.EMERALD
+
+            doc.add_paragraph().paragraph_format.space_after = Pt(4)
 
         # ----------------------------------------------------------------------
         # 1. INSTITUTIONAL HEADER BLOCK WITH EMBEDDED LOGOS
@@ -752,8 +777,10 @@ class ExecutiveDocxCompiler:
         r_app.font.color.rgb = self.SLATE
 
         p_prov = doc.add_paragraph()
+        run_status = "DRAFT FOR REVIEW" if active_anomalies else "OFFICIAL STATUTORY RELEASE"
+        run_id_tag = "DRAFT" if active_anomalies else "OFFICIAL"
         p_prov.add_run(
-            f"Autonomous Run ID: RUN-{period_id}-EXEC904 | Target Period: {period_id} (DRAFT FOR REVIEW)\n"
+            f"Autonomous Run ID: RUN-{period_id}-{run_id_tag} | Target Period: {period_id} ({run_status})\n"
             f"Multi-Source Ingestion Manifest:\n"
             f"• Live Financial Stream: yfinance API v0.2+ (Quotes: BZ=F, CL=F, NG=F, INR=X as of {latest_trading_date})\n"
             f"• Discrete Government Letters: Official OMs & Lok Sabha Notices (F.No. 14/1/2026-Q, OM 28(4)/PF-II, PNGRB Order 45)\n"

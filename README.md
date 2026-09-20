@@ -336,7 +336,7 @@ Copy and paste these prompts directly into Gemini Enterprise or the ADK CLI duri
 * **Tool Invoked**: `run_sarimax_forecast(product_name="High Speed Diesel (HSD)", horizon_months=12)`
 * **Expected Ground-Truth Output**:
   * Fits seasonal ARIMA on authentic 77-month PPAC series.
-  * Projects demand through August 2027 (terminal: **~7,839 TMT/month**, +11.6% CAGR).
+  * Projects demand through August 2027 (terminal: **~7,839 TMT/month**, +3.7% YoY Seasonally Adjusted Annual Growth).
   * Renders 200 DPI publication graphic with 80% and 95% shaded confidence cones.
 
 ### Question 5: Statutory Report Synthesis & Governance Certification
@@ -345,7 +345,7 @@ Copy and paste these prompts directly into Gemini Enterprise or the ADK CLI duri
 * **Tool Invoked**: `compile_statutory_report(period_id="2026-08")` & `publish_report_to_google_docs`
 * **Expected Ground-Truth Output**:
   * Certifies 6/6 sovereign governance sanity checks (`CHK-001` through `CHK-006`).
-  * Emits the official **[Native Google Docs Report](https://docs.google.com/document/d/1_ksVknabzsOGaxUWeVOYcx45FZUSnWEtusoSAmvcTeg/edit)**.
+  * Emits the official **[Native Google Docs Report](https://docs.google.com/document/d/1Ra0pXfO9qu5b8hvTfWJhSZlbR3bWBKRZNV-98MkS2Io/edit)**.
   * Emits the **[HTML Sovereign Executive Dashboard](https://storage.cloud.google.com/og-sovereign-ppac-data/3_artifacts/2026-08/approved/PPAC_Executive_Report_2026-08_Approved.html)** featuring 10 official Monthly Highlights, 27 tables, and 10 numbered citations.
 
 ### Question 6: Chromebook Live In-Browser Editing

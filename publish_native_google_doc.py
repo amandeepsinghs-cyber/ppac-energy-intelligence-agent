@@ -18,8 +18,8 @@ def generate_markdown(period_id="2026-08") -> str:
     
     # KPI Executive Summary
     lines.append("## Executive Sovereign Key Performance Indicators")
-    lines.append("* **Indian Crude Basket (ICB):** **$90.19 / bbl** (₹8,610 / bbl) | *Source: PPAC Table 25*")
-    lines.append("* **Brent Crude Benchmark:** **$83.41 / bbl** (ICE London Close) | *Source: Platts / ICE*")
+    lines.append("* **Indian Crude Basket (ICB):** **$90.19 / bbl** (₹7,589.50 / bbl) | *Source: PPAC Table 25*")
+    lines.append("* **Brent Crude Benchmark:** **$90.84 / bbl** (ICE London Close) | *Source: Platts / ICE*")
     lines.append("* **APM Natural Gas Price:** **$7.00 / MMBTU** (Statutory Ceiling Enforced) | *Source: MoPNG Gazette*")
     lines.append("* **Net Oil & Gas Trade Bill:** **$11.20 Billion** (Crude: $13.7B, LNG: $1.2B, Exports: $5.0B) | *Source: DGCIS*")
     lines.append("* **Gross POL Delivery:** **18,606 TMT** (18.61 MMT) | *Source: PPAC Table 11(A)*\n")
@@ -33,7 +33,7 @@ def generate_markdown(period_id="2026-08") -> str:
         "**Indigenous Crude Oil & Condensate Production:** Production during July 2026 was **2.3 MMT** (August provisional: 2,246 TMT). Around **78.7%** of production came from Nomination Fields, **11.8%** from Pre-NELP Fields, and **9.3%** from NELP Fields. De-growth of 5.3% YoY was recorded against July 2025.",
         "**Refinery Crude Processing:** Total crude oil processed during July 2026 was **23.8 MMT** (+2.0% YoY), of which PSU/JV refiners processed 15.8 MMT and private refiners processed 8.0 MMT. Total indigenous crude processed was 2.1 MMT and imported crude was 21.6 MMT.",
         "**Crude Oil Imports & Net Trade Bill:** Crude oil imports registered a growth of **13.3%** during July 2026 (21.4 MMT; $13.7 Billion). As compared to net oil & gas import bill for July 2025 of $9.4 Billion, the net import bill for July 2026 was **$11.2 Billion** (Crude: $13.7B, LNG imports: $1.2B, POL exports: $5.0B).",
-        "**International Benchmark & Basket Pricing:** Brent Crude averaged **$83.41/bbl** during July 2026 (vs $85.47/bbl in June 2026 and $70.99/bbl in July 2025). The Indian Basket Crude (ICB) price averaged **$82.04/bbl** (vs $83.22/bbl in June 2026 and $70.95/bbl in July 2025).",
+        "**International Benchmark & Basket Pricing:** Brent Crude averaged **$90.84/bbl** for August 2026 provisional ($83.41/bbl in July 2026). The Indian Basket Crude (ICB) price averaged **$90.19/bbl** (₹7,589.50/bbl at RBI ₹84.15/USD) for August 2026 (vs $82.04/bbl in July 2026 and $70.95/bbl in July 2025).",
         "**Production of Petroleum Products (POL):** Production reached **24.8 MMT** during July 2026 (+3.0% YoY; 24.5 MMT refinery throughput + 0.3 MMT fractionators). Major product shares: High-Speed Diesel (HSD) **41.9%**, Motor Spirit (MS) **17.5%**, Naphtha **6.5%**, ATF **5.1%**, Pet Coke **4.8%**, LPG **4.9%**.",
         "**Imports of POL Products:** Registered a de-growth of **40.6%** during July 2026 (2.5 MMT; $1.3 Billion) and 45.1% during April–July FY 2026-27, driven by sharp reductions in imports of LPG, petcoke, and fuel oil.",
         "**Exports of POL Products:** Registered a growth of **8.3%** during July 2026 (5.5 MMT; $5.0 Billion), with cumulative April–July FY 2026-27 exports standing at 16.5 MMT ($16.7 Billion).",

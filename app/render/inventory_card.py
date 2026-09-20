@@ -20,8 +20,29 @@ def _text(component_id: str, text: str, variant: str = "body") -> Dict[str, Any]
     }
 
 
-def build_lake_inventory_components(inventory: PpacLakeInventory) -> List[Dict[str, Any]]:
+def build_lake_inventory_components(inventory: PpacLakeInventory | Dict[str, Any]) -> List[Dict[str, Any]]:
     """Build the A2UI component list describing the live sovereign lake inventory."""
+    if isinstance(inventory, dict):
+        try:
+            data = dict(inventory)
+            data.pop("total_objects", None)
+            data.pop("total_bytes", None)
+            for field_name in ["raw_psu_submissions", "raw_official_pubs", "curated_datasets", "artifacts", "quarantine"]:
+                if field_name in data and isinstance(data[field_name], list):
+                    data[field_name] = [
+                        GcsObjectInfo(**item) if isinstance(item, dict) else item
+                        for item in data[field_name]
+                    ]
+            inventory = PpacLakeInventory(**data)
+        except Exception:
+            # Fallback if fields are missing
+            inventory = PpacLakeInventory(
+                bucket=str(inventory.get("bucket", "og-sovereign-ppac-data")),
+                region=str(inventory.get("region", "asia-south1")),
+                ok=bool(inventory.get("ok", True)),
+                error=inventory.get("error"),
+            )
+
     children: List[str] = []
     components: List[Dict[str, Any]] = []
 

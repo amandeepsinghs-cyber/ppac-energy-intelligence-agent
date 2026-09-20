@@ -63,7 +63,7 @@ def build_forecast_components(summary: ForecastResultSummary) -> List[Dict[str, 
         _text(
             "fc-proj-body",
             f"• {h_label} Projected Volume: {summary.forecast_36m_end_tmt:,.0f} TMT / month\n"
-            f"• Annualized Growth (CAGR): +{summary.growth_cagr_pct:.1f}%\n"
+            f"• Seasonally Adjusted Annual Growth: +{summary.growth_cagr_pct:.1f}% YoY\n"
             f"• Confidence Intervals: 80% and 95% uncertainty bands modeled\n"
             f"• Seasonality: Accounting for pre-monsoon agricultural harvesting & Q3 festive surges",
             "body",
