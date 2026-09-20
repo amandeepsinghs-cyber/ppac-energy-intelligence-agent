@@ -115,7 +115,7 @@ chapters:
     visual:
       chart_id: "chart_price_buildup_breakdown"
       type: "stacked_bar"
-      title: "Retail Selling Price (RSP) Tax & Duty Distribution in Delhi Metro"
+      title: "Retail Selling Price (RSP) Tax & Duty Distribution at Delhi"
     tables:
       - id: "rsp_buildup_table"
         title: "Table 4.1: Delhi Ex-Depot, Excise Duty, VAT & Dealer Margin Breakdown"

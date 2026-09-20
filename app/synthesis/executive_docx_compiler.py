@@ -490,7 +490,7 @@ class ExecutiveDocxCompiler:
         # 7. CHAPTER 4: RETAIL SELLING PRICE (RSP) & TAX BUILD-UP
         # ----------------------------------------------------------------------
         ch4_p = doc.add_paragraph()
-        r_ch4 = ch4_p.add_run("Chapter 4: Retail Selling Price (RSP) Build-up in Delhi Metro")
+        r_ch4 = ch4_p.add_run("Chapter 4: Retail Selling Price (RSP) Build-up at Delhi")
         r_ch4.font.size = Pt(12)
         r_ch4.font.bold = True
         r_ch4.font.color.rgb = self.NAVY
@@ -510,11 +510,11 @@ class ExecutiveDocxCompiler:
             p_img3.add_run().add_picture(str(chart3), width=Inches(6.8))
             p_cap3 = doc.add_paragraph()
             p_cap3.alignment = WD_ALIGN_PARAGRAPH.CENTER
-            p_cap3.add_run("Figure 4.1: Delhi Metro Auto Fuel Fiscal & Duty Architecture (₹ per Litre)").font.size = Pt(7.5)
+            p_cap3.add_run("Figure 4.1: Retail Fuel Fiscal & Duty Architecture at Delhi (₹ per Litre)").font.size = Pt(7.5)
             p_cap3.runs[0].font.italic = True
 
         p_src_rsp = doc.add_paragraph()
-        r_srsp = p_src_rsp.add_run("Source: IOCL State Level Coordinator (SLC) Delhi Metro Price Build-up Gazette & Ministry of Finance (CBIC) Excise Notifications.")
+        r_srsp = p_src_rsp.add_run("Source: IOCL State Level Coordinator (SLC) Delhi Price Build-up Schedule & Ministry of Finance (CBIC) Excise Notifications.")
         r_srsp.font.size = Pt(7)
         r_srsp.font.italic = True
         r_srsp.font.color.rgb = self.MUTED_TEXT
@@ -745,7 +745,7 @@ class ExecutiveDocxCompiler:
             ("Natural Gas Pricing", "MoPNG Gas Pricing Cell", "Gazette Notification L-12015", "Monthly / Bi-Annual", "VERIFIED"),
             ("Upstream Production", "DGH India", "Monthly Indigenous Return", "Monthly (1st Close)", "VERIFIED"),
             ("Import Dependency", "DGCIS / MoC", "Customs Crude Bill Ledger", "Monthly Trade", "VERIFIED"),
-            ("Retail Fuel Prices", "IOCL State Coordinator", "Metro Daily Build-Up Schedule", "Daily Schedule", "VERIFIED"),
+            ("Retail Fuel Prices", "IOCL State Coordinator", "Daily Price Build-Up Schedule", "Daily Schedule", "VERIFIED"),
             ("Macroeconomics", "RBI / MoSPI", "RBI Reference Rate & CPI", "Monthly / Quarterly", "VERIFIED"),
         ]
 

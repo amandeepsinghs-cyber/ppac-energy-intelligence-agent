@@ -249,7 +249,7 @@ class PpacDocxCompiler:
         # ----------------------------------------------------------------------
         # CHAPTER 7: DELHI RETAIL SELLING PRICE (RSP) BUILD-UP
         # ----------------------------------------------------------------------
-        self._add_chapter_heading(doc, "Chapter 7: Retail Selling Price (RSP) Build-up in Delhi Metro")
+        self._add_chapter_heading(doc, "Chapter 7: Retail Selling Price (RSP) Build-up at Delhi")
         doc.add_paragraph(
             "Retail prices of Petrol and Diesel at Indian Oil Corporation (IOCL) retail outlets in National Capital Territory (NCT) "
             "of Delhi reflect base product cost, central excise duty, dealer commission, and state value-added tax (VAT):"

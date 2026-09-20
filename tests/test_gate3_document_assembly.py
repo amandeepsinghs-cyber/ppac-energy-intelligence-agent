@@ -84,7 +84,7 @@ def test_zero_to_draft_document_assembly(fixtures_dir, tmp_output_dir):
     assert "Chapter 4: Domestic Petroleum Product Sales & OMC Breakdown" in full_text
     assert "Chapter 5: Indian Crude Basket (ICB) & International Prices" in full_text
     assert "Chapter 6: Natural Gas Administered Pricing & HPHT Deepwater Ceiling" in full_text
-    assert "Chapter 7: Retail Selling Price (RSP) Build-up in Delhi Metro" in full_text
+    assert "Chapter 7: Retail Selling Price (RSP) Build-up at Delhi" in full_text
     assert "Chapter 8: Econometric 60-Day Fuel Demand Forecast (SARIMAX)" in full_text
     assert "BPCL" in full_text
     assert "LPG" in full_text

@@ -238,15 +238,15 @@ def generate_markdown(period_id="2026-08") -> str:
         lines.append(f"| {r['pricing_regime']} | {r['formula_basis']} | {r['effective_price']} | **{r['statutory_status']}** |")
     lines.append("*Source: MoPNG Kirit Parikh Formula Notifications [1], PPAC [2].*\n")
     
-    lines.append("### Table 24: Retail Selling Prices of CNG & PNG in Metros [Source: 1, 6]")
-    lines.append("| Metropolitan City | CNG Price (₹/kg) | Domestic PNG (₹/SCM) | State VAT on CNG (%) |")
+    lines.append("### Table 24: Retail Selling Prices of CNG & PNG in Selected Cities [Source: 1, 6]")
+    lines.append("| City | CNG Price (₹/kg) | Domestic PNG (₹/SCM) | State VAT on CNG (%) |")
     lines.append("|---|---|---|---|")
     for r in ds["table24_metro_cng_png_prices"]:
         lines.append(f"| {r['city']} | {r['cng_price']} | {r['png_domestic']} | {r['state_vat_cng']} |")
     lines.append("*Source: CGD Operator Tariff Notices [6].*\n")
     
-    lines.append("### Table 25: Retail Selling Price Metro Comparison [Source: 1, 6]")
-    lines.append("| Metropolitan City | Petrol (MS) (₹/L) | Diesel (HSD) (₹/L) | LPG Domestic (14.2kg) |")
+    lines.append("### Table 25: Retail Selling Price Buildup & Four-City Comparison [Source: 1, 6]")
+    lines.append("| City | Petrol (MS) (₹/L) | Diesel (HSD) (₹/L) | LPG Domestic (14.2kg) |")
     lines.append("|---|---|---|---|")
     for r in ds["table25_pricing_tax_buildup"]["metro_comparison"]:
         lines.append(f"| {r['metro']} | {r['petrol_inr_l']} | {r['diesel_inr_l']} | {r['lpg_domestic_cylinder']} |")

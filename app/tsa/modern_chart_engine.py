@@ -183,7 +183,7 @@ class ModernChartEngine:
         ax.bar(x - width / 2, petrol_vals, width, label="Petrol (BS-VI)", color=self.NAVY)
         ax.bar(x + width / 2, diesel_vals, width, label="Diesel (BS-VI)", color=self.AMBER)
 
-        ax.set_title("Delhi Metro Retail Price Build-up Structure (₹ per Litre)", fontsize=11, fontweight="bold", color=self.NAVY, pad=12)
+        ax.set_title("Retail Selling Price (RSP) Build-up Structure at Delhi (₹ per Litre)", fontsize=11, fontweight="bold", color=self.NAVY, pad=12)
         ax.set_xticks(x)
         ax.set_xticklabels(categories, fontsize=8)
         ax.set_ylabel("Price (INR/Litre)", fontsize=8.5, fontweight="bold", color=self.NAVY)

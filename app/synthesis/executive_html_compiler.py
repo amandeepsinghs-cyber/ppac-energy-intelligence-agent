@@ -934,14 +934,14 @@ class ExecutiveHtmlCompiler:
             lines.append(f'        <tr><td>{r["pricing_regime"]}</td><td>{r["formula_basis"]}</td><td>{r["effective_price"]}</td><td><strong>{r["statutory_status"]}</strong></td></tr>')
         lines.append('    </tbody></table><div class="eia-footnote">Source: MoPNG Pricing Notifications under Kirit Parikh Committee Guidelines [1], PPAC Gas Pricing Cell [2].</div>')
 
-        lines.append('    <div class="eia-table-title">Table 24: Retail Selling Prices of CNG & PNG in Selected Metropolitan Cities <span class="citation-tag">[Source: 1, 6]</span></div>')
+        lines.append('    <div class="eia-table-title">Table 24: Retail Selling Prices of CNG & PNG in Selected Cities <span class="citation-tag">[Source: 1, 6]</span></div>')
         lines.append('    <table class="eia-table"><thead><tr><th>City / CGD Operator</th><th>CNG Price (₹/kg)</th><th>Domestic PNG (₹/SCM)</th><th>State VAT on CNG (%)</th></tr></thead><tbody>')
         for r in ds["table24_metro_cng_png_prices"]:
             lines.append(f'        <tr><td>{r["city"]}</td><td>{r["cng_price"]}</td><td>{r["png_domestic"]}</td><td>{r["state_vat_cng"]}</td></tr>')
         lines.append('    </tbody></table><div class="eia-footnote">Source: City Gas Distribution Company Tariff Schedules [6].</div>')
 
-        lines.append('    <div class="eia-table-title">Table 25: Retail Selling Price Buildup & Metro Comparison <span class="citation-tag">[Source: 1, 6]</span></div>')
-        lines.append('    <table class="eia-table"><thead><tr><th>Metropolitan City</th><th>Petrol (MS) (₹/Litre)</th><th>Diesel (HSD) (₹/Litre)</th><th>LPG Domestic (14.2kg)</th></tr></thead><tbody>')
+        lines.append('    <div class="eia-table-title">Table 25: Retail Selling Price Buildup & Four-City Comparison <span class="citation-tag">[Source: 1, 6]</span></div>')
+        lines.append('    <table class="eia-table"><thead><tr><th>City</th><th>Petrol (MS) (₹/Litre)</th><th>Diesel (HSD) (₹/Litre)</th><th>LPG Domestic (14.2kg)</th></tr></thead><tbody>')
         for r in ds["table25_pricing_tax_buildup"]["metro_comparison"]:
             lines.append(f'        <tr><td>{r["metro"]}</td><td>{r["petrol_inr_l"]}</td><td>{r["diesel_inr_l"]}</td><td>{r["lpg_domestic_cylinder"]}</td></tr>')
         lines.append('    </tbody></table><div class="eia-footnote">Source: IOCL, BPCL, and HPCL Retail Selling Price Notices [6].</div>')
@@ -949,7 +949,7 @@ class ExecutiveHtmlCompiler:
         if b64_c6:
             lines.append('    <div class="graphic-container">')
             lines.append(f'        <img src="{b64_c6}" alt="Price Buildup Waterfall">')
-            lines.append('        <div class="graphic-caption">Figure 7: Delhi Metro Retail Price Build-up Structure (₹ per Litre) — Tax Incidence: Petrol 35.7% · Diesel 31.2%</div>')
+            lines.append('        <div class="graphic-caption">Figure 7: Retail Selling Price (RSP) Build-up Structure at Delhi (₹ per Litre) — Tax Incidence: Petrol 35.7% · Diesel 31.2%</div>')
             lines.append('    </div><div class="eia-footnote">Source: Central Board of Indirect Taxes and Customs (CBIC) [1] & State Commercial Tax Departments.</div>')
 
         lines.append('    <div class="eia-table-title">Table 26: Capital Expenditure (CAPEX) of Major PSU Oil & Gas Companies (₹ Crore) <span class="citation-tag">[Source: 1, 7]</span></div>')
