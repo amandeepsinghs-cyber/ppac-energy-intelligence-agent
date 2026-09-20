@@ -267,21 +267,6 @@ def generate_markdown(period_id="2026-08") -> str:
     lines.append("*Source: PPAC Ready Reckoner Technical Annexure [2].*\n")
     lines.append("---")
     
-    # Part G: Governance Checks
-    lines.append("## Part G: Automated Governance, Parity Verification & Audit Sign-Off\n")
-    lines.append("### Section 6.1: Algorithmic Balance and Reconciliation Gates (6/6 PASSED)")
-    lines.append("| Verification Gate | Target Hydrocarbon Flow | Algorithmic Rule | Tolerance | Computed Variance | Status |")
-    lines.append("|---|---|---|---|---|---|")
-    lines.append("| **CHK-001** | LPG Delivery Ledger | OMC Bulk Despatch vs Plant Gate Liftings | ±0.05% | +0.01% (Within Limits) | **PASSED** |")
-    lines.append("| **CHK-002** | Retail Sales Reconciliation | OMC Metered Deliveries vs Retailer Invoices | ±0.10% | 0.00% (Exact Match) | **PASSED** |")
-    lines.append("| **CHK-003** | Crude Import Parity | Customs Bills of Entry vs Refinery Receipt Tanks | ±0.20% | -0.03% (Normal Evap) | **PASSED** |")
-    lines.append("| **CHK-004** | Statutory Subsidy Accrual | DBTL Bank Transfers vs Aadhaar Accounts | 0.00% | ₹0.00 Discrepancy | **PASSED** |")
-    lines.append("| **CHK-005** | Refinery Yield Parity | Crude Throughput vs Products + Fuel Loss | ±0.50% | 0.14% Loss (Nelson Range) | **PASSED** |")
-    lines.append("| **CHK-006** | Price Build-Up Integrity | Delhi/Mumbai RSP vs Gazette Formula Sum | ₹0.01 | Exact to Second Decimal | **PASSED** |")
-    lines.append("\n**STATUTORY AUDIT STATUS:** **APPROVED FOR STATUTORY GAZETTE**")
-    lines.append(f"*Digital Signature Hash: SHA256:{hash(period_id) & 0xFFFFFFFFFFFFFFFF:016x}*\n")
-    lines.append("---")
-    
     # Section 7: Citations
     lines.append("## Section 7: Statutory Data Sources & Numbered Citations\n")
     lines.append("| Ref ID | Statutory Authority / Agency | Jurisdiction, Regulatory Mandate & Scope | Reporting Cycle |")

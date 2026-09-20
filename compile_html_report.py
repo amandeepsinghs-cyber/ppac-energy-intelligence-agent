@@ -57,8 +57,11 @@ def main(period_id="2026-08"):
 
     # Charts and logos
     assets_dir = base_dir / "assets"
-    crest_path, logo_path = generate_institutional_logos(assets_dir)
-    logos = {"header_crest": crest_path, "institutional_logo": logo_path}
+    logos = {
+        "header_crest": assets_dir / "emblem_of_india.png",
+        "institutional_logo": assets_dir / "ppac_official_logo.png",
+        "ppac_25_logo": assets_dir / "ppac_25_logo.png",
+    }
 
     charts_dir = artifacts_dir / "charts"
     charts = {

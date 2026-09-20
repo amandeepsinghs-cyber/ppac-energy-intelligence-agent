@@ -46,17 +46,21 @@ def build_report_artifact_components(summary: ReportArtifactSummary) -> List[Dic
 
     add({"id": "rep-div-2", "component": "Divider"})
 
-    # Download & Google Docs links
-    add(_text("rep-dl-hdr", "Verified Statutory Artifacts & Sovereign Reports", "h5"))
-    gdocs_url = summary.google_docs_url or "https://docs.google.com/document/d/1Ra0pXfO9qu5b8hvTfWJhSZlbR3bWBKRZNV-98MkS2Io/edit"
+    # Primary Interactive Sovereign Report
+    add(_text("rep-dl-hdr", "Official Sovereign Hydrocarbon Publication", "h5"))
     html_url = summary.html_web_url or f"https://storage.cloud.google.com/og-sovereign-ppac-data/3_artifacts/{summary.period_id}/approved/PPAC_Executive_Report_{summary.period_id}_Approved.html"
-    docx_url = summary.docx_web_url or f"https://storage.cloud.google.com/og-sovereign-ppac-data/3_artifacts/{summary.period_id}/approved/PPAC_Executive_Report_{summary.period_id}_Approved.docx"
 
     # Direct interactive web links
-    add(_text("rep-dl-gdocs-link", f"📝 Open in Google Docs (Chromebook Native): {gdocs_url}", "body"))
-    add(_text("rep-dl-html-link", f"🌐 Open HTML Executive Dashboard: {html_url}", "body"))
-    add(_text("rep-dl-docx-link", f"📄 Download Word (.docx): {docx_url}", "caption"))
-    add(_text("rep-dl-vault", f"🔒 Sovereign GCS Vault Archive: {summary.docx_gcs_uri}", "caption"))
+    add(_text("rep-dl-html-link", f"🌐 Open Interactive Sovereign Report: {html_url}", "body"))
+    add(
+        _text(
+            "rep-dl-editing-hint",
+            "✏️ In-Browser Live Editing: Click directly on any figure, table cell, or text to edit. "
+            "Use '💾 Save Edits' for local persistence, '📥 Download HTML' for standalone sharing, or '🖨 Print / PDF' for institutional gazette export.",
+            "caption",
+        )
+    )
+    add(_text("rep-dl-vault", f"🔒 Sovereign GCS Vault Archive: {summary.html_gcs_uri}", "caption"))
 
     root_card = {
         "id": ROOT_CARD_ID,

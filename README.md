@@ -162,13 +162,13 @@ flowchart TD
 * **Engine Actions**:
   - Invokes `compile_statutory_report(period_id="2026-08")` & `publish_report_to_google_docs`.
   - Synthesizes the styled 15-page HTML dashboard, native Google Doc, and executive Word DOCX.
-  - Validates Section 6 critical governance checks (`CHK-001` through `CHK-006`).
+  - Incorporates official MoPNG branding: Three Lions State Emblem of India, 1:1 scaled PPAC 25-Year Jubilee emblem, uncrowded leader-line charts, and T+1 publication cadence.
   - Uploads approved artifacts to `gs://og-sovereign-ppac-data/3_artifacts/2026-08/approved/`.
 * **Expected Output**:
   - **Conversational Narrative**:
     > **August 2026 Monthly Ready Reckoner Executive Report** has been synthesized and certified:
-    > • **Governance & Sanity Checks**: 6/6 checks PASSED (`CHK-001` Consumption Parity, `CHK-002` Refinery Processing, `CHK-003` Import Dependency, `CHK-004` APM Gas Ceiling, `CHK-005` LPG Subsidy Exposure, `CHK-006` SARIMAX Stationarity).
-    > • **Publication Lag Compressed**: Generated at T+0 close; ready for 48-hour review (T+2 publication).
+    > • **Statutory Compliance**: Synthesized with authentic MoPNG masthead, 10 official Monthly Highlights, 27 structured data tables, and 10 numbered citations.
+    > • **Publication Cadence**: Publication Month August 2026 (`Aug 26`) analyzing historical ground-truth for July 2026 (`Data for July’2026`).
     > • **Available Formats**: Native Google Docs Edition, HTML Sovereign Dashboard, and Word (`.docx`) Edition.
     > • **Direct Google Docs Link**: [PPAC August 2026 Report (Google Docs)](https://docs.google.com/document/d/1Ra0pXfO9qu5b8hvTfWJhSZlbR3bWBKRZNV-98MkS2Io/edit)
   - **Gemini Enterprise A2UI Surface**:
@@ -331,12 +331,13 @@ Copy and paste these prompts directly into Gemini Enterprise or the ADK CLI duri
   * Projects demand through August 2027 (terminal: **~7,839 TMT/month**, +3.7% YoY Seasonally Adjusted Annual Growth).
   * Renders native interactive A2UI `VegaChart` with dynamic full-spectrum Y-scale (`[3,800, 12,900] TMT`), shared axis resolve, and 80%/95% confidence bands, accompanied by the **Interactive 12-Month Monthly Projections Matrix Table** detailing projected demand, bounds, and seasonal regimes.
 
-### Question 5: Statutory Report Synthesis & Governance Certification (Final)
+### Question 5: Statutory Report Synthesis & Publication (Final)
 * **Prompt**:
-  > *"Compile and publish the official August 2026 PPAC Executive Report to Google Docs."*
+  > *"Compile and publish the official August 2026 PPAC Executive Report to Google Docs."*  
+  *(Or: "Compile and generate the August 2026 PPAC Executive Report.")*
 * **Tool Invoked**: `compile_statutory_report(period_id="2026-08")` & `publish_report_to_google_docs`
 * **Expected Ground-Truth Output**:
-  * Certifies 6/6 sovereign governance sanity checks (`CHK-001` through `CHK-006`).
+  * Synthesizes the executive report with authentic MoPNG masthead, Three Lions State Emblem, 1:1 scaled PPAC 25-Year jubilee emblem, and uncrowded leader-line charts.
   * Emits the official **[Native Google Docs Report](https://docs.google.com/document/d/1Ra0pXfO9qu5b8hvTfWJhSZlbR3bWBKRZNV-98MkS2Io/edit)**.
   * Emits the **[HTML Sovereign Executive Dashboard](https://storage.cloud.google.com/og-sovereign-ppac-data/3_artifacts/2026-08/approved/PPAC_Executive_Report_2026-08_Approved.html)** featuring 10 official Monthly Highlights, 27 tables, and 10 numbered citations.
 

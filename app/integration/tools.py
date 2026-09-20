@@ -577,6 +577,7 @@ def compile_statutory_report(
         "html_dashboard_url": html_web_url,
         "html_artifact": html_uri,
         "docx_artifact": docx_uri,
+        "editing_capabilities": "Direct in-browser live editing enabled (click any cell/text to edit, local persistence, download edited HTML, print/PDF)",
         "summary_highlights": executive_points,
     }
 
