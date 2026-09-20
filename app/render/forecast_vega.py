@@ -75,35 +75,93 @@ def build_forecast_vega_spec(
             "upper": up,
         })
 
-    all_vals = (history_values or [summary.baseline_tmt]) + (forecast_values or [summary.forecast_36m_end_tmt])
-    min_y = max(0.0, round(min(all_vals) - 500, -2))
-    max_y = round(max(all_vals) + 600, -2)
+    import math
+
+    all_numeric: List[float] = []
+    if history_values:
+        all_numeric.extend(history_values)
+    elif getattr(summary, "baseline_tmt", None):
+        all_numeric.append(summary.baseline_tmt)
+
+    if forecast_values:
+        all_numeric.extend(forecast_values)
+    elif getattr(summary, "forecast_36m_end_tmt", None):
+        all_numeric.append(summary.forecast_36m_end_tmt)
+
+    if lower_bounds:
+        all_numeric.extend([x for x in lower_bounds if x is not None])
+    if upper_bounds:
+        all_numeric.extend([x for x in upper_bounds if x is not None])
+
+    if not all_numeric:
+        all_numeric = [5000.0, 10000.0]
+
+    val_min = min(all_numeric)
+    val_max = max(all_numeric)
+    span = max(val_max - val_min, 100.0)
+
+    # Dynamic scaling matching publication plot (~8% buffer above/below)
+    min_y = max(0.0, float(math.floor((val_min - span * 0.08) / 100) * 100))
+    max_y = float(math.ceil((val_max + span * 0.08) / 100) * 100)
+
+    y_scale: Dict[str, Any] = {
+        "domain": [min_y, max_y],
+        "zero": False,
+        "nice": True,
+    }
 
     return {
         "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
         "description": summary.chart_title or "PPAC National Fuel Demand Trajectory",
-        "width": 420,
-        "height": 220,
+        "width": 440,
+        "height": 230,
+        "padding": {"left": 10, "right": 20, "top": 10, "bottom": 10},
+        "resolve": {
+            "scale": {
+                "y": "shared"
+            }
+        },
         "data": {"values": plot_data},
         "layer": [
             {
                 "transform": [{"filter": "datum.lower != null"}],
-                "mark": {"type": "area", "opacity": 0.22, "color": "#C68A4C"},
+                "mark": {"type": "area", "opacity": 0.18, "color": "#C68A4C"},
                 "encoding": {
-                    "x": {"field": "month", "type": "nominal", "axis": {"title": "Month", "labelAngle": -35}},
-                    "y": {"field": "lower", "type": "quantitative", "scale": {"domain": [min_y, max_y]}},
+                    "x": {
+                        "field": "month",
+                        "type": "nominal",
+                        "axis": {
+                            "title": "Month",
+                            "labelAngle": -30,
+                            "labelOverlap": "parity",
+                        },
+                    },
+                    "y": {
+                        "field": "lower",
+                        "type": "quantitative",
+                        "scale": y_scale,
+                        "axis": {"title": "Monthly Demand (TMT)", "grid": True},
+                    },
                     "y2": {"field": "upper"},
                 },
             },
             {
-                "mark": {"type": "line", "point": True, "strokeWidth": 2.5},
+                "mark": {"type": "line", "point": {"filled": True, "size": 45}, "strokeWidth": 2.4},
                 "encoding": {
-                    "x": {"field": "month", "type": "nominal"},
+                    "x": {
+                        "field": "month",
+                        "type": "nominal",
+                        "axis": {
+                            "title": "Month",
+                            "labelAngle": -30,
+                            "labelOverlap": "parity",
+                        },
+                    },
                     "y": {
                         "field": "volume",
                         "type": "quantitative",
                         "axis": {"title": "Monthly Demand (TMT)", "grid": True},
-                        "scale": {"domain": [min_y, max_y]},
+                        "scale": y_scale,
                     },
                     "color": {
                         "field": "series",
@@ -127,6 +185,8 @@ def build_forecast_vega_spec(
                         {"field": "month", "type": "nominal", "title": "Month"},
                         {"field": "series", "type": "nominal", "title": "Series"},
                         {"field": "volume", "type": "quantitative", "title": "Demand (TMT)", "format": ",.1f"},
+                        {"field": "lower", "type": "quantitative", "title": "95% Lower Limit", "format": ",.1f"},
+                        {"field": "upper", "type": "quantitative", "title": "95% Upper Limit", "format": ",.1f"},
                     ],
                 },
             },
