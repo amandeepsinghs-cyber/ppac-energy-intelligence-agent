@@ -99,11 +99,11 @@ def test_pricing_matrix_card_a2ui_structure():
     )
     comps = build_pricing_matrix_components(summary)
     _validate_a2ui_tree(comps)
-    # Check that Image plot component is mounted
-    img_comps = [c for c in comps if c.get("component") == "Image"]
-    assert len(img_comps) == 1
-    assert img_comps[0]["id"] == "pm-chart-img"
-    assert img_comps[0]["url"].startswith("data:image/png;base64,")
+    # Check that VegaChart plot component is mounted
+    chart_comps = [c for c in comps if c.get("component") == "VegaChart"]
+    assert len(chart_comps) == 1
+    assert chart_comps[0]["id"] == "pm-chart-vega"
+    assert "spec" in chart_comps[0]
 
 
 def test_focused_pricing_matrix_cards_a2ui():
@@ -128,10 +128,10 @@ def test_focused_pricing_matrix_cards_a2ui():
         )
         comps = build_pricing_matrix_components(summary)
         _validate_a2ui_tree(comps)
-        img_comps = [c for c in comps if c.get("component") == "Image"]
-        assert len(img_comps) == 1
-        assert img_comps[0]["id"] == "pm-chart-img"
-        assert img_comps[0]["url"].startswith("data:image/png;base64,")
+        chart_comps = [c for c in comps if c.get("component") == "VegaChart"]
+        assert len(chart_comps) == 1
+        assert chart_comps[0]["id"] == "pm-chart-vega"
+        assert "spec" in chart_comps[0]
 
 
 def test_forecast_card_a2ui_structure():
@@ -254,7 +254,7 @@ def test_callback_scrubbing_and_emission():
     })
     surface_content = emit_a2ui_surface(callback_context=mock_ctx)
     assert surface_content is not None
-    assert len(surface_content.parts) == 2  # createSurface + updateComponents
+    assert len(surface_content.parts) == 3  # createSurface + updateDataModel + updateComponents
     assert mock_ctx.state.get(PENDING_PRICING_KEY) is None
 
     # Test emit_a2ui_surface for PENDING_INVENTORY_KEY with dict serialization
@@ -296,10 +296,10 @@ def test_historical_demand_tool_and_card_a2ui():
     # Test components and A2UI surface
     components = build_historical_components(summary)
     _validate_a2ui_tree(components)
-    img_nodes = [c for c in components if c.get("component") == "Image"]
-    assert len(img_nodes) == 1
-    assert img_nodes[0]["id"] == "hc-chart-img"
-    assert "data:image/png;base64," in img_nodes[0]["url"]
+    chart_nodes = [c for c in components if c.get("component") == "VegaChart"]
+    assert len(chart_nodes) == 1
+    assert chart_nodes[0]["id"] == "hc-chart-vega"
+    assert "spec" in chart_nodes[0]
 
     surface_parts = build_historical_surface(summary, "historical-demand-surface")
     assert len(surface_parts) == 3

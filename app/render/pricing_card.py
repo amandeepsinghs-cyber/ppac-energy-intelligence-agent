@@ -345,17 +345,19 @@ def build_pricing_matrix_components(summary: MarketBenchmarkSummary) -> List[Dic
     )
     add({"id": "pm-div-1", "component": "Divider"})
 
-    # Dedicated high-resolution plot mounted at top of card
-    if chart_b64:
-        add({
-            "id": "pm-chart-img",
-            "component": "Image",
-            "url": f"data:image/png;base64,{chart_b64}",
-            "description": chart_desc,
-            "fit": "contain",
-            "variant": "largeFeature",
-        })
-        add({"id": "pm-div-chart", "component": "Divider"})
+    # Live interactive VegaChart mounted at top of card with inlined spec
+    from app.render.pricing_vega import build_pricing_vega_spec
+
+    vega_spec = build_pricing_vega_spec(summary)
+    chart_component = {
+        "id": "pm-chart-vega",
+        "component": "VegaChart",
+        "spec": vega_spec,
+        "height": 290,
+    }
+    components.append(chart_component)
+    children.append("pm-chart-vega")
+    add({"id": "pm-div-chart", "component": "Divider"})
 
     def add_sec_consumption():
         add(_text("pm-sec3-hdr", "Verified National POL Consumption (Table 11A)", "h5"))
@@ -445,8 +447,23 @@ def build_pricing_matrix_components(summary: MarketBenchmarkSummary) -> List[Dic
         add_sec_crude_gas()
         add({"id": "pm-div-2", "component": "Divider"})
         add_sec_retail()
-        add({"id": "pm-div-3", "component": "Divider"})
-        add_sec_consumption()
+    # Interactive Digital Fuel & Benchmark Grid
+    inr_icb = summary.icb_price_usd_bbl * summary.rbi_exchange_rate_inr_usd
+    benchmark_lines = [
+        "| Stream / Cost Element | Benchmark / Pump Price | Regulatory / Sovereign Standard |",
+        "| :--- | :---: | :--- |",
+        f"| **Indian Crude Basket (ICB)** | **${summary.icb_price_usd_bbl:.2f} / bbl** | ₹{inr_icb:,.2f} / bbl · Official MoPNG Sourcing Benchmark |",
+        f"| **Brent Dated (Sweet)** | **${summary.brent_dated_usd_bbl:.2f} / bbl** | S&P Platts North Sea Grade Benchmark |",
+        f"| **Oman & Dubai Sour (50:50)** | **${summary.oman_dubai_sour_usd_bbl:.2f} / bbl** | Middle East Sour Crude Loading Basis |",
+        f"| **Domestic APM Natural Gas** | **${summary.apm_gas_usd_mmbtu:.2f} / MMBTU** | Statutory Price Ceiling (Kirit Parikh Formula) |",
+        f"| **HPHT / Deepwater Gas Ceiling** | **${summary.hpht_gas_ceiling_usd_mmbtu:.2f} / MMBTU** | Difficult Fields Statutory Price Ceiling |",
+        f"| **Delhi Retail Petrol (MS)** | **₹{summary.delhi_ms_petrol_inr_litre:.2f} / Litre** | [Base ₹55.42 · Excise ₹19.90 · Comm ₹4.41 · VAT ₹15.39] |",
+        f"| **Delhi Retail Diesel (HSD)** | **₹{summary.delhi_hsd_diesel_inr_litre:.2f} / Litre** | [Base ₹56.25 · Excise ₹15.80 · Comm ₹3.00 · VAT ₹12.57] |",
+        f"| **Subsidized Domestic LPG (14.2kg)** | **₹{summary.delhi_lpg_domestic_inr_cylinder:.2f} / Cyl** | MoPNG Regulated Household Cylinder |",
+    ]
+    add({"id": "pm-div-grid", "component": "Divider"})
+    add(_text("pm-grid-hdr", f"Interactive Hydrocarbon Benchmark Matrix ({summary.period_id})", "h5"))
+    add(_text("pm-grid-table", "\n".join(benchmark_lines), "body"))
 
     root_card = {
         "id": ROOT_CARD_ID,

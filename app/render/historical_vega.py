@@ -28,15 +28,27 @@ def build_historical_vega_spec(summary: HistoricalDemandSummary) -> Dict[str, An
     if not plot_data:
         plot_data = [{"month": "2026-08", "volume": 7023.0, "product": summary.product_name}]
 
+    import math
+
     all_vals = [d["volume"] for d in plot_data]
-    min_y = max(0.0, round(min(all_vals) * 0.85, -2))
-    max_y = round(max(all_vals) * 1.15, -2)
+    val_min = min(all_vals)
+    val_max = max(all_vals)
+    span = max(val_max - val_min, 100.0)
+    min_y = max(0.0, float(math.floor((val_min - span * 0.08) / 100) * 100))
+    max_y = float(math.ceil((val_max + span * 0.08) / 100) * 100)
+
+    y_scale: Dict[str, Any] = {
+        "domain": [min_y, max_y],
+        "zero": False,
+        "nice": True,
+    }
 
     return {
         "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
         "description": f"Official PPAC Historical Consumption: {summary.product_name} ({summary.start_period} to {summary.end_period})",
         "width": 440,
         "height": 230,
+        "padding": {"left": 10, "right": 20, "top": 10, "bottom": 10},
         "data": {"values": plot_data},
         "layer": [
             {
@@ -60,7 +72,7 @@ def build_historical_vega_spec(summary: HistoricalDemandSummary) -> Dict[str, An
                             "format": ",.0f",
                             "grid": True,
                         },
-                        "scale": {"domain": [min_y, max_y]},
+                        "scale": y_scale,
                     },
                     "tooltip": [
                         {"field": "month", "type": "nominal", "title": "Month"},

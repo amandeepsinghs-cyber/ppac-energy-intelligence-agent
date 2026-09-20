@@ -43,7 +43,7 @@ The Petroleum Planning & Analysis Cell (PPAC), operating under the Ministry of P
 | **1** | **Multi-PSU Data Siloing & Ingestion Delay** | OMCs (IOCL, BPCL, HPCL) and upstream PSUs (ONGC, GAIL, OIL) submit disparate, non-standardized Excel/ERP extracts days after month close. | **Automated Sovereign Ingestion**: Medallion Data Lake (`gs://og-sovereign-ppac-data`) with automated schema validation, anomaly quarantine, and instant reconciliation across all 5 PSUs. |
 | **2** | **Manual Mathematical Parity & Accounting Errors** | Analysts perform manual spreadsheet cross-tabulation across refinery throughput, net sales, blending offsets, and imports, risking parity violations. | **Automated Governance Sanity Checks**: 6 continuous validation checks (`CHK-001` through `CHK-006`) enforcing mass balance parity, throughput ceilings, and tariff rules before draft generation. |
 | **3** | **Uncertain Data Provenance & Lineage Gaps** | Published numbers often lack explicit statutory footnotes, creating audit friction between DGCIS customs figures, OMC retail sales, and market Platts/Argus quotes. | **Universal Statutory Provenance Matrix**: Every metric, table, and chart carries exact institutional lineage and statutory source mapping across all 7 data domains. |
-| **4** | **Static 2-Month Extrapolations vs. True Seasonality** | Traditional reporting relies on simple month-on-month growth, failing to capture agricultural harvesting dips (monsoon) or Q3 festive consumption surges. | **Live 36-Month SARIMAX Econometric Engine**: Stationarity-verified econometric models fitted over 77 months of authentic PPAC series with 80%/95% confidence intervals. |
+| **4** | **Static Extrapolations vs. True Seasonality** | Traditional reporting relies on simple month-on-month growth, failing to capture agricultural harvesting dips (monsoon) or Q3 festive consumption surges. | **Live 12-Month SARIMAX Econometric Engine**: Stationarity-verified econometric models fitted over 77 months of authentic PPAC series with 80%/95% confidence intervals and dynamic interactive visualization. |
 | **5** | **Complex Formula Administration (ICB & APM Gas)** | Calculating weighted Indian Crude Basket (Oman/Dubai 75.6% : Brent 24.4%) and Kirit Parikh domestic gas ceiling ($7.00/MMBTU floor/ceiling rules) requires manual verification. | **Deterministic Statutory Pricing Engines**: Zero-latency algorithmic calculation of ICB, APM gas ceilings, deepwater HP-HT tariffs, and metropolitan pump price build-ups. |
 | **6** | **High Executive Friction for Ad-Hoc Data Exploration** | Senior leadership (Secretary MoPNG, PPAC Director General) must request specialized analyst runs to inspect multi-year consumption or subsidy trends. | **Native Gemini Enterprise & A2UI Interface**: Conversational executive interface with interactive Material 3 KPI cards, dynamic pricing matrices, and native Vega/A2UI charts. |
 
@@ -51,55 +51,37 @@ The Petroleum Planning & Analysis Cell (PPAC), operating under the Ministry of P
 
 ### 1.3 Key Questions the System & Agent Answer for Leadership
 
-The agent is designed to answer both strategic macroeconomic questions and granular operational inquiries across the hydrocarbon value chain:
+The agent is designed to answer both strategic macroeconomic questions and granular operational inquiries across the hydrocarbon value chain, organized in an **incremental sovereign intelligence lifecycle**:
 
-#### Macroeconomic & Policy Decisions
-1. *"What is the projected 12-month demand trajectory for High Speed Diesel and Petrol, accounting for monsoon harvesting and festival seasonality?"*
-2. *"What is India's current crude import dependency percentage, and how has our crude import bill trended over the last 12 months?"*
-3. *"How much fiscal exposure is MoPNG carrying under the Pradhan Mantri Ujjwala Yojana (PMUY) LPG subsidy at current international benchmark prices?"*
-4. *"Is domestic natural gas pricing compliant with the statutory Kirit Parikh formula ceiling of $7.00/MMBTU, and what is the applicable deepwater HP-HT cap?"*
+#### Incremental Sovereign Lifecycle (Intake ➔ Baseline ➔ Pricing ➔ Forecasting ➔ Statutory Release)
+1. **Intake & Lake Audit**: *"What is the status of August 2026 PSU submissions across IOCL, BPCL, HPCL, ONGC, and GAIL in our sovereign data lake?"*
+2. **Historical Baseline & Seasonality**: *"What is the 5-year historical consumption trend for High Speed Diesel and Petrol, and how does agricultural/festive seasonality impact it?"*
+3. **Statutory Pricing & Formula Compliance**: *"Can I see the August 2026 crude benchmarks, is domestic natural gas compliant with the Kirit Parikh $7.00/MMBTU ceiling, and what is the Delhi pump price build-up?"*
+4. **Forward Econometric Forecasting (Second to Last)**: *"What is the projected 12-month SARIMAX demand trajectory for High Speed Diesel, accounting for monsoon harvesting and festival seasonality?"*
+5. **Statutory Report Synthesis & Certification (Final)**: *"Can you generate, certify, and publish the official August 2026 Monthly Ready Reckoner executive report with all 6 governance checks?"*
 
-#### Operational & Sovereign Data Auditing
-5. *"What is the status of August 2026 PSU submissions across IOCL, BPCL, HPCL, ONGC, and GAIL in our sovereign data lake?"*
-6. *"Are there any unresolved anomaly quarantine exceptions or mass-balance parity mismatches across refinery throughput and consumption?"*
-7. *"What is the statutory source and provenance behind our Indian Crude Basket weighting and retail pump price build-up in Delhi, Mumbai, Kolkata, and Chennai?"*
-8. *"Can you generate and certify the complete official August 2026 Monthly Ready Reckoner executive draft with all critical governance checks?"*
+#### Strategic Macroeconomic & Audit Deep Dives
+* **Crude Import Dependency**: *"What is India's current crude import dependency percentage, and how has our crude import bill trended over the last 12 months?"*
+* **Subsidy Fiscal Exposure**: *"How much fiscal exposure is MoPNG carrying under the Pradhan Mantri Ujjwala Yojana (PMUY) LPG subsidy at current international benchmark prices?"*
+* **Governance & Quarantine**: *"Are there any unresolved anomaly quarantine exceptions or mass-balance parity mismatches across refinery throughput and consumption?"*
+* **Statutory Provenance Lineage**: *"What is the statutory source and provenance behind our Indian Crude Basket weighting and retail pump price build-up across major metros?"*
 
 ---
 
 ## 2. Executive Summary & Architecture Overview
 
-This conversational walkthrough demonstrates how Gemini Enterprise serves as the unified, single-pane-of-glass solution for energy planning leadership.
+This conversational walkthrough demonstrates how Gemini Enterprise serves as the unified, single-pane-of-glass solution for energy planning leadership across the 5 incremental stages of monthly hydrocarbon intelligence.
 
 ```mermaid
 flowchart TD
-    Turn0["Turn 0: Historical Demand & Seasonality\n'What is the 5-year historical consumption trend for High Speed Diesel?'\n👉 Renders High-Resolution Historical Demand Card with Inline Plot"]
-    Turn1["Turn 1: Lake Audit\n'What is the status of August 2026 PSU submissions?'\n👉 Renders A2UI Lake Inventory Card"]
-    Turn2["Turn 2: Pricing Intelligence\n'Show August 2026 crude benchmarks & Delhi fuel prices'\n👉 Renders A2UI Pricing Matrix Card"]
-    Turn3["Turn 3: 12-Month SARIMAX Forecast\n'Run 12-month SARIMAX demand forecast for High Speed Diesel'\n👉 Renders Native 200 DPI Inline Trajectory Chart"]
-    Turn4["Turn 4: Dual-Lineage Provenance\n'Where did the ICB weighting and PMUY subsidy originate?'\n👉 Explains Ready Reckoner Tables vs OMC ERP feeds"]
-    Turn5["Turn 5: Statutory Report Release\n'Generate the official August 2026 Executive Report'\n👉 Renders A2UI Report Release Card with GCS links"]
+    Turn1["Turn 1: Sovereign Lake Audit\n'What is the status of August 2026 PSU submissions?'\n👉 Renders A2UI Lake Inventory Card"]
+    Turn2["Turn 2: Historical Demand Baseline\n'What is the 5-year historical consumption trend for HSD?'\n👉 Renders Native Interactive VegaChart & FY Table"]
+    Turn3["Turn 3: Statutory Benchmark Pricing\n'Show August 2026 crude benchmarks & Delhi fuel prices'\n👉 Renders Native Interactive VegaChart & Pricing Table"]
+    Turn4["Turn 4: 12-Month SARIMAX Forecast (Second to Last)\n'Run 12-month SARIMAX demand forecast for High Speed Diesel'\n👉 Renders Native Interactive VegaChart with 95% Bounds & Projection Matrix"]
+    Turn5["Turn 5: Statutory Report Synthesis (Final)\n'Compile and publish the official August 2026 Executive Report'\n👉 Renders A2UI Report Release Card with Google Docs Link"]
 
-    Turn0 --> Turn1 --> Turn2 --> Turn3 --> Turn4 --> Turn5
+    Turn1 --> Turn2 --> Turn3 --> Turn4 --> Turn5
 ```
-
----
-
-### Turn 0: Multi-Year Historical Demand & Seasonality
-* **Executive Prompt**:
-  > *"What is the 5-year historical consumption trend for High Speed Diesel and how does seasonality impact it?"*
-* **Engine Actions**:
-  - Invokes `query_historical_demand(product_name="HSD", years=5)`.
-  - Queries curated 77-month historical series (`ppac_official_historical_consumption_2020_2026.csv`).
-  - Computes fiscal year totals, CAGR, peak month, trough month, and seasonal indices.
-* **Expected Output**:
-  - **Conversational Narrative**:
-    > **High Speed Diesel (HSD)** consumption spans **September 2021 to August 2026** (60 months), with total consumption of **437,842.0 TMT** (monthly average: **7,297.4 TMT**). The annualized growth rate (CAGR) is **+4.9%**.
-    > • **Peak Month**: March 2026 (**8,726.0 TMT**) driven by pre-monsoon harvesting, infrastructure push, and financial year-end logistics.
-    > • **Trough Month**: September 2021 (**5,513.0 TMT**) reflecting peak monsoon agricultural lulls and transport slowdowns.
-    > • **Fiscal Year Breakdown**: FY 21-22: 44,792.0 TMT | FY 22-23: 85,897.0 TMT | FY 23-24: 89,285.0 TMT | FY 24-25: 90,660.0 TMT | FY 25-26: 94,842.0 TMT.
-  - **Gemini Enterprise A2UI Surface**:
-    - **Historical Demand Card with High-Resolution Inline Plot**: 140 DPI annotated publication graphic with green peak and red trough markers, mounted prominently at the top of the card alongside verified multi-year totals and annualized CAGR metrics.
 
 ---
 
@@ -118,7 +100,25 @@ flowchart TD
 
 ---
 
-### Turn 2: Market Commodity Benchmarks & Retail Pump Build-Up
+### Turn 2: Multi-Year Historical Demand & Seasonality Baseline
+* **Executive Prompt**:
+  > *"What is the 5-year historical consumption trend for High Speed Diesel and how does seasonality impact it?"*
+* **Engine Actions**:
+  - Invokes `query_historical_demand(product_name="HSD", years=5)`.
+  - Queries curated 77-month historical series (`ppac_official_historical_consumption_2020_2026.csv`).
+  - Computes fiscal year totals, CAGR, peak month, trough month, and seasonal indices.
+* **Expected Output**:
+  - **Conversational Narrative**:
+    > **High Speed Diesel (HSD)** consumption spans **September 2021 to August 2026** (60 months), with total consumption of **437,842.0 TMT** (monthly average: **7,297.4 TMT**). The annualized growth rate (CAGR) is **+4.9%**.
+    > • **Peak Month**: March 2026 (**8,726.0 TMT**) driven by pre-monsoon harvesting, infrastructure push, and financial year-end logistics.
+    > • **Trough Month**: September 2021 (**5,513.0 TMT**) reflecting peak monsoon agricultural lulls and transport slowdowns.
+    > • **Fiscal Year Breakdown**: FY 21-22: 44,792.0 TMT | FY 22-23: 85,897.0 TMT | FY 23-24: 89,285.0 TMT | FY 24-25: 90,660.0 TMT | FY 25-26: 94,842.0 TMT.
+  - **Gemini Enterprise A2UI Surface**:
+    - **Native Interactive Historical Demand Card**: Interactive A2UI `VegaChart` with dynamic data-driven Y-scaling (`[5,000, 9,500] TMT`, non-zero origin, hover tooltips, parity labels) accompanied by the 5-Year Fiscal Year Consumption Performance Table (FY22–FY27 total demand, MMT, monthly run-rate, sovereign validation).
+
+---
+
+### Turn 3: Market Commodity Benchmarks & Retail Pump Build-Up
 * **Executive Prompt**:
   > *"Can I see the August 2026 crude benchmarks, gas ceilings, and Delhi retail price breakdown?"*
 * **Engine Actions**:
@@ -132,50 +132,36 @@ flowchart TD
     > • **Domestic Gas APM**: Statutory ceiling enforced at **$7.00 / MMBTU** (vs formula unconstrained $9.00 / MMBTU). Deepwater HP-HT cap at **$8.90 / MMBTU**.
     > • **Delhi Pump Prices**: Petrol ₹102.12/L (VAT ₹16.59), Diesel ₹95.20/L (VAT ₹13.91), Subsidized LPG ₹942.00/14.2kg cylinder.
   - **Gemini Enterprise A2UI Surface**:
-    - **Pricing Matrix Card**: Two-column executive card displaying upstream crude benchmarks, domestic natural gas floor/ceilings, and complete retail price build-ups.
+    - **Native Interactive Pricing Matrix Card**: Interactive A2UI `VegaChart` multi-benchmark horizontal bars (Crude benchmarks $/bbl, Delhi pump build-up ₹/L, Natural gas ceilings $/MMBTU, POL demand TMT) paired with a complete statutory price build-up matrix table.
 
 ---
 
-### Turn 3: Live 12-Month SARIMAX Econometric Forecasting
+### Turn 4: Live 12-Month SARIMAX Econometric Forecasting (Second to Last)
 * **Executive Prompt**:
   > *"Run a 12-month SARIMAX demand forecast for High Speed Diesel (HSD)."*
 * **Engine Actions**:
   - Invokes `run_sarimax_forecast(product_name="High Speed Diesel (HSD)", horizon_months=12)`.
   - Fits seasonal ARIMA on historical monthly consumption from the official August 2026 baseline (7,023 TMT).
-  - Projects monthly volumes through August 2027 (CAGR: +11.6%, terminal volume: ~7,839 TMT/month).
-  - Computes 80% and 95% uncertainty cones and renders a 200 DPI publication graphic encoded as an inline base64 URI.
+  - Projects monthly volumes through August 2027 (CAGR: +3.7% YoY Seasonally Adjusted Annual Growth, terminal volume: ~7,839 TMT/month).
+  - Computes 80% and 95% Gaussian uncertainty cones and renders a native interactive A2UI `VegaChart` with full-spectrum dynamic Y-scale (`[3,800, 12,900] TMT`), shared axis resolve, and companion tabular projections matrix.
 * **Expected Output**:
   - **Conversational Narrative**:
     > Fitted SARIMAX (1,1,1)x(1,1,1)₁₂ demand forecast for **High Speed Diesel (HSD)** over 12 months (Sep 2026 – Aug 2027):
     > • **Baseline**: August 2026 (**7,023.0 TMT**)
     > • **Terminal 12-Month Projected Volume**: **7,839.2 TMT** / month
-    > • **Projected Annualized Growth (CAGR)**: **+11.6%**
-    > • **Seasonality Factors**: Models harvest surge in Q4/Q1 and monsoon dip in July/August.
+    > • **Projected Seasonally Adjusted Growth**: **+3.7% YoY**
+    > • **Seasonality Factors**: Models pre-monsoon harvest surge and Q3 festive haulage peak.
   - **Gemini Enterprise A2UI Surface**:
-    - **Forecast Chart Card**: High-resolution 200 DPI publication graphic displaying historical actuals, 12-month dotted trajectory, and shaded 80%/95% confidence intervals.
+    - **Native Interactive Forecast Card**: Dynamic A2UI `VegaChart` rendering historical actuals, 12-month dotted projection line, and 80%/95% confidence bands, accompanied by the **Interactive 12-Month Monthly Projections Matrix Table** detailing forward periods, projected demand, confidence intervals, and seasonal demand regimes.
 
 ---
 
-### Turn 4: Dual-Lineage Provenance & Statutory Audit
+### Turn 5: Statutory Report Synthesis & Artifact Delivery (Final)
 * **Executive Prompt**:
-  > *"Where did the ICB basket weights and PMUY subsidy numbers originate?"*
+  > *"Compile and publish the official August 2026 PPAC Executive Report to Google Docs."*
 * **Engine Actions**:
-  - Analyzes data provenance across operational intake versus reporting synthesis.
-* **Expected Output**:
-  - **Executive Prose Response**:
-    > **Data Provenance & Statutory Lineage**:
-    > 1. **Indian Crude Basket (ICB) Weights**: PPAC Monthly Ready Reckoner Table 25 specifies the statutory split of **75.6% Sour (Oman & Dubai average)** and **24.4% Sweet (Dated Brent)** based on national refinery processing yields.
-    > 2. **Daily Commodity Quotes**: ICE Platts (Dubai/Oman) and Argus (Dated Brent) settlement assessments.
-    > 3. **PMUY LPG Subsidy**: Ministry of Finance Office Memorandum OM-C-12011/2026 authorizing ₹12,000 Crore budgetary allocation for targeted ₹300/cylinder subsidies across 10.3 Crore beneficiaries.
-
----
-
-### Turn 5: Statutory Report Synthesis & Artifact Delivery
-* **Executive Prompt**:
-  > *"Generate and sign off on the official August 2026 Executive Report."*
-* **Engine Actions**:
-  - Invokes `compile_statutory_report(period_id="2026-08")`.
-  - Synthesizes the styled 15-page HTML and executive Word DOCX.
+  - Invokes `compile_statutory_report(period_id="2026-08")` & `publish_report_to_google_docs`.
+  - Synthesizes the styled 15-page HTML dashboard, native Google Doc, and executive Word DOCX.
   - Validates Section 6 critical governance checks (`CHK-001` through `CHK-006`).
   - Uploads approved artifacts to `gs://og-sovereign-ppac-data/3_artifacts/2026-08/approved/`.
 * **Expected Output**:
@@ -184,10 +170,10 @@ flowchart TD
     > • **Governance & Sanity Checks**: 6/6 checks PASSED (`CHK-001` Consumption Parity, `CHK-002` Refinery Processing, `CHK-003` Import Dependency, `CHK-004` APM Gas Ceiling, `CHK-005` LPG Subsidy Exposure, `CHK-006` SARIMAX Stationarity).
     > • **Publication Lag Compressed**: Generated at T+0 close; ready for 48-hour review (T+2 publication).
     > • **Available Formats**: Native Google Docs Edition, HTML Sovereign Dashboard, and Word (`.docx`) Edition.
-    > • **Direct Google Docs Link**: [PPAC August 2026 Report (Google Docs)](https://docs.google.com/document/d/1_ksVknabzsOGaxUWeVOYcx45FZUSnWEtusoSAmvcTeg/edit)
+    > • **Direct Google Docs Link**: [PPAC August 2026 Report (Google Docs)](https://docs.google.com/document/d/1Ra0pXfO9qu5b8hvTfWJhSZlbR3bWBKRZNV-98MkS2Io/edit)
   - **Gemini Enterprise A2UI Surface**:
-    - **Report Release Card**: Visual summary of key metrics, green governance status pill, and clickable links:
-      - **Google Docs**: `https://docs.google.com/document/d/1_ksVknabzsOGaxUWeVOYcx45FZUSnWEtusoSAmvcTeg/edit`
+    - **Report Release Card**: Visual summary of key metrics, green governance status pill, and direct links:
+      - **Google Docs**: [Official August 2026 Report](https://docs.google.com/document/d/1Ra0pXfO9qu5b8hvTfWJhSZlbR3bWBKRZNV-98MkS2Io/edit)
       - `gs://og-sovereign-ppac-data/3_artifacts/2026-08/approved/PPAC_Executive_Report_2026-08_Approved.html`
       - `gs://og-sovereign-ppac-data/3_artifacts/2026-08/approved/PPAC_Executive_Report_2026-08_Approved.docx`
 
@@ -248,16 +234,21 @@ ppac-energy-intelligence-agent/
 │   ├── pricing/               # ICB calculator & Natural Gas APM engine
 │   ├── tsa/                   # SARIMAX forecaster & vector chart engine
 │   ├── synthesis/             # HTML & DOCX publication compilers
-│   ├── render/                # A2UI v0.9 lifecycle builders (Cards, Images, Envelopes)
+│   ├── render/                # A2UI v0.9 lifecycle builders (Cards, Vega, Envelopes)
+│   │   ├── a2ui_emit.py       # Multi-part createSurface + updateDataModel + updateComponents emitter
 │   │   ├── a2ui_envelope.py   # Serializes <a2a_datapart_json> envelopes
 │   │   ├── a2ui_lifecycle.py  # createSurface & updateComponents builders
 │   │   ├── inventory_card.py  # Sovereign lake inventory surface
+│   │   ├── historical_card.py # Historical demand card with fiscal year table
+│   │   ├── historical_vega.py # Dynamic interactive Vega-Lite spec for historical consumption
 │   │   ├── pricing_card.py    # Upstream & retail pricing matrix surface
-│   │   ├── forecast_card.py   # 36m SARIMAX forecast surface with inline chart
+│   │   ├── pricing_vega.py    # Dynamic interactive Vega-Lite spec for pricing benchmarks
+│   │   ├── forecast_card.py   # 12m SARIMAX forecast surface with projections matrix table
+│   │   ├── forecast_vega.py   # Dynamic interactive Vega-Lite spec with 95% confidence bands
 │   │   └── report_card.py     # Approved statutory report release surface
 │   ├── integration/           # ADK Agent, A2uiNegotiatingExecutor & Tools
 │   └── app_utils/             # Process-wide session/artifact services & A2A routes
-├── tests/                     # 18 passing tests across 6 Phased Gates
+├── tests/                     # 20 passing tests across 6 Phased Gates
 ├── agents-cli-manifest.yaml   # Deployment manifest for Vertex AI Agent Runtime
 ├── pyproject.toml             # Dependencies (Google ADK, A2A SDK, statsmodels)
 └── README.md
@@ -299,9 +290,18 @@ tests/test_gate5_adk_a2ui_integration.py::test_historical_demand_tool_and_card_a
 
 ## 7. Official Live Demo Prompt Sequence (Turn-by-Turn)
 
-Copy and paste these prompts directly into Gemini Enterprise or the ADK CLI during executive demonstrations:
+Copy and paste these prompts directly into Gemini Enterprise or the ADK CLI during executive demonstrations, progressing through the **incremental 5-stage sovereign intelligence lifecycle**:
 
-### Question 1: 5-Year Historical Demand & Seasonality (PPAC Ground Truth)
+### Question 1: Sovereign Data Lake Audit (Medallion Ingestion)
+* **Prompt**:
+  > *"What is the status of August 2026 PSU submissions in our sovereign data lake?"*
+* **Tool Invoked**: `inspect_sovereign_lake(period_id="2026-08")`
+* **Expected Ground-Truth Output**:
+  * Audits `gs://og-sovereign-ppac-data/` in `asia-south1` (Mumbai).
+  * Verifies intake files from all 5 PSUs (IOCL, BPCL, HPCL, ONGC, GAIL).
+  * Confirms **0 unresolved quarantine exceptions** and displays the A2UI Lake Inventory Card.
+
+### Question 2: 5-Year Historical Demand Baseline & Seasonality (PPAC Ground Truth)
 * **Prompt**:
   > *"What is the 5-year historical consumption trend for High Speed Diesel and how does seasonality impact it?"*
 * **Tool Invoked**: `query_historical_demand(product_name="HSD", years=5)`
@@ -310,16 +310,7 @@ Copy and paste these prompts directly into Gemini Enterprise or the ADK CLI duri
   * 5-Year Annualized CAGR: **+4.9%**.
   * **Peak Month**: March 2026 (**8,726.0 TMT**) driven by pre-monsoon harvesting, road construction, and fiscal year close.
   * **Trough Month**: September 2021 (**5,513.0 TMT**) due to peak monsoon agricultural and transport slowdowns.
-  * Renders the high-resolution Historical Demand Card with inline peak/trough annotations.
-
-### Question 2: Sovereign Data Lake Audit (Medallion Ingestion)
-* **Prompt**:
-  > *"What is the status of August 2026 PSU submissions in our sovereign data lake?"*
-* **Tool Invoked**: `inspect_sovereign_lake(period_id="2026-08")`
-* **Expected Ground-Truth Output**:
-  * Audits `gs://og-sovereign-ppac-data/` in `asia-south1` (Mumbai).
-  * Verifies intake files from all 5 PSUs (IOCL, BPCL, HPCL, ONGC, GAIL).
-  * Confirms **0 unresolved quarantine exceptions** and displays the A2UI Lake Inventory Card.
+  * Renders the native interactive A2UI `VegaChart` with dynamic data-driven Y-scaling (`[5,000, 9,500] TMT`, non-zero origin, hover tooltips) and companion 5-Year Fiscal Year Performance Table.
 
 ### Question 3: Statutory Benchmark Pricing & Retail Pump Breakdown
 * **Prompt**:
@@ -329,17 +320,18 @@ Copy and paste these prompts directly into Gemini Enterprise or the ADK CLI duri
   * **Indian Crude Basket (ICB)**: **$90.19 / bbl** (₹7,589.50 / bbl) at 75.6% Oman/Dubai ($89.98) and 24.4% Brent ($90.84), with RBI Reference Rate at ₹84.15 / USD.
   * **Domestic Gas APM**: Enforced at statutory ceiling of **$7.00 / MMBTU** under Kirit Parikh formula; deepwater HP-HT ceiling at **$8.90 / MMBTU**.
   * **Delhi Retail Pump Prices**: Petrol ₹102.12/L (VAT ₹16.59), Diesel ₹95.20/L (VAT ₹13.91), Domestic LPG ₹942.00/14.2kg.
+  * Renders the native interactive A2UI `VegaChart` multi-benchmark horizontal bars and tabular pricing breakdown matrix.
 
-### Question 4: 12-Month SARIMAX Forward Econometric Forecast
+### Question 4: 12-Month SARIMAX Forward Econometric Forecast (Second to Last)
 * **Prompt**:
   > *"Run a 12-month SARIMAX demand forecast for High Speed Diesel (HSD)."*
 * **Tool Invoked**: `run_sarimax_forecast(product_name="High Speed Diesel (HSD)", horizon_months=12)`
 * **Expected Ground-Truth Output**:
   * Fits seasonal ARIMA on authentic 77-month PPAC series.
   * Projects demand through August 2027 (terminal: **~7,839 TMT/month**, +3.7% YoY Seasonally Adjusted Annual Growth).
-  * Renders 200 DPI publication graphic with 80% and 95% shaded confidence cones.
+  * Renders native interactive A2UI `VegaChart` with dynamic full-spectrum Y-scale (`[3,800, 12,900] TMT`), shared axis resolve, and 80%/95% confidence bands, accompanied by the **Interactive 12-Month Monthly Projections Matrix Table** detailing projected demand, bounds, and seasonal regimes.
 
-### Question 5: Statutory Report Synthesis & Governance Certification
+### Question 5: Statutory Report Synthesis & Governance Certification (Final)
 * **Prompt**:
   > *"Compile and publish the official August 2026 PPAC Executive Report to Google Docs."*
 * **Tool Invoked**: `compile_statutory_report(period_id="2026-08")` & `publish_report_to_google_docs`
@@ -348,7 +340,7 @@ Copy and paste these prompts directly into Gemini Enterprise or the ADK CLI duri
   * Emits the official **[Native Google Docs Report](https://docs.google.com/document/d/1Ra0pXfO9qu5b8hvTfWJhSZlbR3bWBKRZNV-98MkS2Io/edit)**.
   * Emits the **[HTML Sovereign Executive Dashboard](https://storage.cloud.google.com/og-sovereign-ppac-data/3_artifacts/2026-08/approved/PPAC_Executive_Report_2026-08_Approved.html)** featuring 10 official Monthly Highlights, 27 tables, and 10 numbered citations.
 
-### Question 6: Chromebook Live In-Browser Editing
+### Question 6: Chromebook Live In-Browser Editing & Governance Sign-Off
 * **Workflow**:
   1. Open the [HTML Dashboard](https://storage.cloud.google.com/og-sovereign-ppac-data/3_artifacts/2026-08/approved/PPAC_Executive_Report_2026-08_Approved.html).
   2. Click any table cell or sentence to edit in-place directly on your screen.

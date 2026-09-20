@@ -44,9 +44,11 @@ def build_inventory_surface(inventory: PpacLakeInventory, surface_id: str) -> Li
 
 
 def build_pricing_surface(summary: MarketBenchmarkSummary, surface_id: str) -> List[types.Part]:
-    """Emit createSurface + updateComponents for market benchmarks and pricing with plot."""
+    """Emit createSurface + updateDataModel (Vega spec) + updateComponents for market benchmarks and pricing with plot."""
+    spec = build_pricing_vega_spec(summary)
     return [
         wrap_a2ui_part(build_create_surface(surface_id=surface_id)),
+        wrap_a2ui_part(build_update_data_model(surface_id=surface_id, value={SPEC_KEY: spec})),
         wrap_a2ui_part(
             build_update_components(
                 surface_id=surface_id,

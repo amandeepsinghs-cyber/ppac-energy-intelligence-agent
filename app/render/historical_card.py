@@ -39,23 +39,19 @@ def build_historical_components(summary: HistoricalDemandSummary) -> List[Dict[s
             "caption",
         )
     )
-    # Prominent high-resolution publication plot mounted at top of card
-    if getattr(summary, "chart_image_base64", None):
-        data_uri = summary.chart_image_base64
-        if not data_uri.startswith("data:image"):
-            data_uri = f"data:image/png;base64,{data_uri}"
+    # Live interactive VegaChart mounted at top of card with inlined spec
+    from app.render.historical_vega import build_historical_vega_spec
 
-        chart_component = {
-            "id": "hc-chart-img",
-            "component": "Image",
-            "url": data_uri,
-            "description": f"Historical Demand Trend - {summary.product_name}",
-            "fit": "contain",
-            "variant": "largeFeature",
-        }
-        components.append(chart_component)
-        children.append("hc-chart-img")
-        add({"id": "hc-div-chart", "component": "Divider"})
+    vega_spec = build_historical_vega_spec(summary)
+    chart_component = {
+        "id": "hc-chart-vega",
+        "component": "VegaChart",
+        "spec": vega_spec,
+        "height": 290,
+    }
+    components.append(chart_component)
+    children.append("hc-chart-vega")
+    add({"id": "hc-div-chart", "component": "Divider"})
 
     # Key Multi-Year Quantitative Highlights
     annual_txt_lines = [f"• {fy}: {vol:,.0f} TMT" for fy, vol in summary.annual_summary.items()]
@@ -69,11 +65,24 @@ def build_historical_components(summary: HistoricalDemandSummary) -> List[Dict[s
             f"• Monthly Consumption Average: {summary.average_monthly_tmt:,.0f} TMT / month\n"
             f"• Historical Peak Month: {summary.peak_month} ({summary.peak_volume_tmt:,.0f} TMT)\n"
             f"• Historical Trough Month: {summary.trough_month} ({summary.trough_volume_tmt:,.0f} TMT)\n"
-            f"• Multi-Year CAGR: +{summary.cagr_pct:.1f}% Annualized\n\n"
-            f"Official Fiscal Year Totals:\n{annual_block}",
+            f"• Multi-Year CAGR: +{summary.cagr_pct:.1f}% Annualized",
             "body",
         )
     )
+
+    # Interactive Digital Fiscal Year Data Grid
+    table_lines = [
+        "| Fiscal Year | Total Demand (TMT) | Equivalent (MMT) | Average / Month | Sovereign Validation Status |",
+        "| :--- | :---: | :---: | :---: | :--- |",
+    ]
+    for fy, vol in summary.annual_summary.items():
+        mmt = vol / 1000.0
+        avg_m = vol / 12.0
+        table_lines.append(f"| **{fy}** | **{vol:,.1f} TMT** | {mmt:,.2f} MMT | {avg_m:,.1f} TMT | Verified MoPNG Series |")
+
+    add({"id": "hc-div-grid", "component": "Divider"})
+    add(_text("hc-grid-hdr", f"Verified Multi-Year Fiscal Matrix ({summary.timeframe_years}-Year Series)", "h5"))
+    add(_text("hc-grid-table", "\n".join(table_lines), "body"))
 
 
 
