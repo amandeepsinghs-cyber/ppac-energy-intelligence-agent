@@ -58,7 +58,7 @@ The agent is designed to answer both strategic macroeconomic questions and granu
 2. **Historical Baseline & Seasonality**: *"What is the 5-year historical consumption trend for High Speed Diesel and Petrol, and how does agricultural/festive seasonality impact it?"*
 3. **Statutory Pricing & Formula Compliance**: *"What are the official August 2026 Indian Crude Basket benchmarks and domestic natural gas statutory price ceilings?"*
 4. **Forward Econometric Forecasting (Second to Last)**: *"What is the projected 12-month SARIMAX demand trajectory for High Speed Diesel, accounting for monsoon harvesting and festival seasonality?"*
-5. **Statutory Report Synthesis & Certification (Final)**: *"Compile and publish the official August 2026 PPAC Executive Report"*
+5. **Statutory Report Synthesis & Certification (Final)**: *"Compile and publish the official August 2026 PPAC Monthly Ready Reckoner"*
 
 #### Strategic Macroeconomic & Audit Deep Dives
 * **Crude Import Dependency**: *"What is India's current crude import dependency percentage, and how has our crude import bill trended over the last 12 months?"*
@@ -121,7 +121,7 @@ flowchart TD
     Turn2["Turn 2: Historical Demand Baseline\n'What is the 5-year historical consumption trend for HSD?'\n👉 Renders Native Interactive VegaChart & FY Table"]
     Turn3["Turn 3: Statutory Benchmark Pricing\n'What are official August 2026 crude benchmarks & gas ceilings?'\n👉 Renders Native Interactive VegaChart & Pricing Table"]
     Turn4["Turn 4: 12-Month SARIMAX Forecast (Second to Last)\n'Run 12-month SARIMAX demand forecast for High Speed Diesel'\n👉 Renders Native Interactive VegaChart with 95% Bounds & Projection Matrix"]
-    Turn5["Turn 5: Statutory Report Synthesis (Final)\n'Compile and publish the official August 2026 PPAC Executive Report'\n👉 Renders A2UI Report Release Card with Live Editable HTML Link"]
+    Turn5["Turn 5: Statutory Report Synthesis (Final)\n'Compile and publish the official August 2026 PPAC Monthly Ready Reckoner'\n👉 Renders A2UI Report Release Card with Live Editable HTML Link"]
 
     Turn1 --> Turn2 --> Turn3 --> Turn4 --> Turn5
 ```
@@ -201,7 +201,7 @@ flowchart TD
 
 ### Turn 5: Statutory Report Synthesis & Artifact Delivery (Final)
 * **Executive Prompt**:
-  > *"Compile and publish the official August 2026 PPAC Executive Report"*
+  > *"Compile and publish the official August 2026 PPAC Monthly Ready Reckoner"*
 * **Engine Actions**:
   - Invokes `compile_statutory_report(period_id="2026-08")`.
   - Synthesizes the interactive, live-editable 15-page HTML dashboard and executive Word DOCX.
@@ -378,13 +378,12 @@ Copy and paste these prompts directly into Gemini Enterprise or the ADK CLI duri
 
 ### Question 5: Statutory Report Synthesis & Publication (Final)
 * **Prompt**:
-  > *"Compile and publish the official August 2026 PPAC Executive Report to Google Docs."*  
-  *(Or: "Compile and generate the August 2026 PPAC Executive Report.")*
-* **Tool Invoked**: `compile_statutory_report(period_id="2026-08")` & `publish_report_to_google_docs`
+  > *"Compile and publish the official August 2026 PPAC Monthly Ready Reckoner."*  
+  *(Or: "Compile and publish the official August 2026 PPAC Executive Report.")*
+* **Tool Invoked**: `compile_statutory_report(period_id="2026-08")`
 * **Expected Ground-Truth Output**:
-  * Synthesizes the executive report with authentic MoPNG masthead, Three Lions State Emblem, 1:1 scaled PPAC 25-Year jubilee emblem, and uncrowded leader-line charts.
-  * Emits the official **[Native Google Docs Report](https://docs.google.com/document/d/1Ra0pXfO9qu5b8hvTfWJhSZlbR3bWBKRZNV-98MkS2Io/edit)**.
-  * Emits the **[HTML Sovereign Executive Dashboard](https://storage.cloud.google.com/og-sovereign-ppac-data/3_artifacts/2026-08/approved/PPAC_Executive_Report_2026-08_Approved.html)** featuring 10 official Monthly Highlights, 27 tables, and 10 numbered citations.
+  * Synthesizes the statutory publication with authentic MoPNG masthead, Three Lions State Emblem, 1:1 scaled PPAC 25-Year jubilee emblem, and uncrowded leader-line charts.
+  * Emits the **[HTML Sovereign Monthly Ready Reckoner](https://storage.cloud.google.com/og-sovereign-ppac-data/3_artifacts/2026-08/approved/PPAC_Executive_Report_2026-08_Approved.html)** featuring the borderless red **`⚠️ PROTOTYPE DEMO REPORT`** disclaimer, 10 official Monthly Highlights, 27 tables, and 10 numbered citations.
 
 ### Question 6: Chromebook Live In-Browser Editing & Governance Sign-Off
 * **Workflow**:

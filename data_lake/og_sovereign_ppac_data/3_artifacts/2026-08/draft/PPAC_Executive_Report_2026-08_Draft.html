@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PPAC Monthly Ready Reckoner — 2026-08 (DRAFT FOR REVIEW)</title>
+    <title>⚠️ PROTOTYPE DEMO REPORT — PPAC Monthly Ready Reckoner 2026-08</title>
     <style>
         :root {
             --ppac-green: #008751;
@@ -85,16 +85,12 @@
             outline: 2px solid #008751 !important; background-color: #F0FDF4 !important; border-radius: 2px;
         }
         .draft-header-tag {
-            background-color: #FEF2F2;
-            border: 2px solid #DC2626;
             color: #DC2626;
             font-size: 15px;
             font-weight: 800;
             letter-spacing: 2px;
             text-align: center;
-            padding: 9px 18px;
-            border-radius: 4px;
-            margin-bottom: 26px;
+            margin-bottom: 20px;
             text-transform: uppercase;
         }
         .inst-header {
@@ -493,7 +489,7 @@
         }
     </style>
     <script>
-        const STORAGE_KEY = 'ppac_report_2026-08_edits';
+        const STORAGE_KEY = 'ppac_report_2026-08_v3_edits';
         function updateStatus(isEdited) {
             const pill = document.getElementById('save-status-pill');
             if (!pill) return;
@@ -559,7 +555,7 @@
     <!-- Chromebook & Desktop Top Action Bar -->
     <div class="chromebook-bar">
         <div style="display: flex; align-items: center; gap: 14px;">
-            <span class="chromebook-bar-title">📄 PPAC Sovereign Hydrocarbon Report · Live Interactive Editor</span>
+            <span class="chromebook-bar-title">📄 ⚠️ PROTOTYPE DEMO REPORT · PPAC Sovereign Hydrocarbon Report · Live Interactive Editor</span>
             <span id="save-status-pill" class="status-pill-synced">🟢 Sovereign Baseline</span>
         </div>
         <div class="chromebook-bar-actions">
@@ -591,6 +587,7 @@
 
         <!-- Official Report Hero Title (100% Center-Aligned on Sheet, in Lines Below Logos) -->
         <div class="report-title-hero">
+            <div class="draft-header-tag">⚠️ PROTOTYPE DEMO REPORT</div>
             <div class="report-main-title">Snapshot of India’s Oil &amp; Gas data</div>
             <div class="report-reckoner-orange">Monthly Ready Reckoner</div>
             <div class="report-period-line">Aug 26 <span class="report-period-sub">(Data for July’2026)</span></div>

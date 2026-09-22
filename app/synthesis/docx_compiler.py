@@ -60,6 +60,11 @@ class PpacDocxCompiler:
         header_p = doc.add_paragraph()
         header_p.alignment = WD_ALIGN_PARAGRAPH.CENTER
 
+        r_demo = header_p.add_run("⚠️ PROTOTYPE DEMO REPORT\n\n")
+        r_demo.font.size = Pt(14)
+        r_demo.font.bold = True
+        r_demo.font.color.rgb = self.CRITICAL_RED
+
         r_gov = header_p.add_run("GOVERNMENT OF INDIA\n")
         r_gov.font.size = Pt(10)
         r_gov.font.bold = True

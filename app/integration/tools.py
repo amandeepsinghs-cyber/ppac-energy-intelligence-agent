@@ -540,6 +540,12 @@ def compile_statutory_report(
     Returns:
         Summary of the generated artifacts with sovereign GCS URIs.
     """
+    try:
+        from compile_html_report import main as compile_html_main
+        compile_html_main(period_id=period_id)
+    except Exception as exc:
+        logger.warning("Local HTML compilation note: %s", exc)
+
     html_uri = f"gs://{BUCKET_NAME}/3_artifacts/{period_id}/approved/PPAC_Executive_Report_{period_id}_Approved.html"
     docx_uri = f"gs://{BUCKET_NAME}/3_artifacts/{period_id}/approved/PPAC_Executive_Report_{period_id}_Approved.docx"
     html_web_url = f"https://storage.cloud.google.com/{BUCKET_NAME}/3_artifacts/{period_id}/approved/PPAC_Executive_Report_{period_id}_Approved.html"
@@ -555,7 +561,7 @@ def compile_statutory_report(
 
     summary = ReportArtifactSummary(
         period_id=period_id,
-        title="PPAC Monthly Hydrocarbon Executive Report",
+        title="⚠️ PROTOTYPE DEMO REPORT — PPAC Monthly Hydrocarbon Executive Report",
         html_gcs_uri=html_uri,
         docx_gcs_uri=docx_uri,
         executive_summary_points=executive_points,
@@ -569,10 +575,14 @@ def compile_statutory_report(
     if tool_context:
         tool_context.state[PENDING_REPORT_KEY] = asdict(summary) if is_dataclass(summary) else summary
 
+    local_preview_url = f"http://127.0.0.1:8823/Oil%20&%20Gas%20Agent%20Portfolio/agent_ideas/report_generation/ppac_reporting_engine/data_lake/og_sovereign_ppac_data/3_artifacts/{period_id}/approved/PPAC_Executive_Report_{period_id}_Approved.html"
+
     return {
         "period_id": period_id,
         "title": summary.title,
+        "classification": "⚠️ PROTOTYPE DEMO REPORT",
         "status": summary.status,
+        "local_preview_url": local_preview_url,
         "html_dashboard_url": html_web_url,
         "html_artifact": html_uri,
         "docx_artifact": docx_uri,

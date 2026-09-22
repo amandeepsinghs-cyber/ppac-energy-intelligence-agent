@@ -29,6 +29,7 @@ def build_report_artifact_components(summary: ReportArtifactSummary) -> List[Dic
         children.append(component["id"])
 
     # Title & Badge
+    add(_text("rep-demo-tag", "⚠️ PROTOTYPE DEMO REPORT", "h4"))
     add(_text("rep-title", summary.title, "h3"))
     add(
         _text(
@@ -49,9 +50,11 @@ def build_report_artifact_components(summary: ReportArtifactSummary) -> List[Dic
     # Primary Interactive Sovereign Report
     add(_text("rep-dl-hdr", "Official Sovereign Hydrocarbon Publication", "h5"))
     html_url = summary.html_web_url or f"https://storage.cloud.google.com/og-sovereign-ppac-data/3_artifacts/{summary.period_id}/approved/PPAC_Executive_Report_{summary.period_id}_Approved.html"
+    local_url = f"http://127.0.0.1:8823/Oil%20&%20Gas%20Agent%20Portfolio/agent_ideas/report_generation/ppac_reporting_engine/data_lake/og_sovereign_ppac_data/3_artifacts/{summary.period_id}/approved/PPAC_Executive_Report_{summary.period_id}_Approved.html"
 
     # Direct interactive web links
-    add(_text("rep-dl-html-link", f"🌐 Open Interactive Sovereign Report: {html_url}", "body"))
+    add(_text("rep-dl-local-link", f"🖥️ Local Interactive Live Preview: {local_url}", "body"))
+    add(_text("rep-dl-html-link", f"🌐 Cloud Storage Vault Link: {html_url}", "body"))
     add(
         _text(
             "rep-dl-editing-hint",
